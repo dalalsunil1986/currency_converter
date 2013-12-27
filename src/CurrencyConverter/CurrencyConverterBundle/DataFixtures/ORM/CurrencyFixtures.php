@@ -52,22 +52,7 @@ class CurrencyFixtures implements FixtureInterface
                        $new_array['country'] = $country;
                        $new_array['code'] = $first->find('a',0)->innertext;
                        $new_array['link'] = $site.$first->find('a',0)->href;
-                       
-                       /*$link = $site.$first->find('a',0)->href;                    
-                       $next_html = file_get_html($link);                       
-                       $stats_div = $next_html->find('div.currencystats',0);
-                       
-                       $inner_row = array();
-                       foreach($stats_div->find('p') as $p){
-                         $inner_row[] = $p;
-                       }
-                       
-                       $new_array['symbol'] = '';
-                       if(isset($inner_row[1])){
-                           $y = $inner_row[1];
-                            $new_array['symbol'] = $y->innertext;
-                       }*/
-                       
+                      
                        $container[] = $new_array;
                     }
                  
@@ -76,8 +61,6 @@ class CurrencyFixtures implements FixtureInterface
            
         }
         
-        //print_r($container);die();
-        $new_array = array();
         foreach($container as $item){          
             
             $next_html = file_get_html($item['link']);                       
