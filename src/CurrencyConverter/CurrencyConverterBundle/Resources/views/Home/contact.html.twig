@@ -1,0 +1,32 @@
+{% extends 'CurrencyConverterCurrencyConverterBundle::layout.html.twig' %}
+
+{% block title %}Contact{% endblock%}
+
+{% block body %}
+    
+    <header>
+        <h1>Contact Me</h1>
+    </header>
+    
+        {% for flashMessage in app.session.flashbag.get('converter-notice') %}
+            <div class="converter-notice">
+                 {{ flashMessage }}
+            </div>
+        {% endfor %}
+    
+    <form action="{{ path('currency_converter_currency_converter_contact') }}" method="post" {{ form_enctype(form) }} class="converter">
+        
+        {{ form_errors(form) }}
+
+        {{ form_row(form.name) }}
+        {{ form_row(form.email) }}
+        {{ form_row(form.subject) }}
+        {{ form_row(form.body) }}
+
+        {{ form_rest(form) }}
+
+        <input type="submit" value="Submit" />
+        
+    </form>
+    
+{% endblock %}

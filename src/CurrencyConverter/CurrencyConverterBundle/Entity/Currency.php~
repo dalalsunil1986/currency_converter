@@ -1,0 +1,35 @@
+<?php
+
+namespace CurrencyConverter\CurrencyConverterBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="currencies")
+ */
+class Currency
+{
+    /**
+     * @ORM\Id
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    protected $id;
+
+    /**
+     * @ORM\Column(type="string", length=120)
+     */
+    protected $currency;
+
+    /**
+     * @ORM\Column(type="string", length=50)
+     */
+    protected $code;
+
+     /**
+     * @ORM\Column(type="string", length=50)
+     */
+    protected $symbol;
+
+}
