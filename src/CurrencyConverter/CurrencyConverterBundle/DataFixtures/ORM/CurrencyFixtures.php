@@ -143,11 +143,7 @@ class CurrencyFixtures implements FixtureInterface
             $manager->flush();
         }
         
-        
-        
-        
-        //print_r($new_array);die();
-        
+       
     }
     
     
