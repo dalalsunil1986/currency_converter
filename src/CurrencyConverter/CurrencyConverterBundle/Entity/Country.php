@@ -5,7 +5,7 @@ namespace CurrencyConverter\CurrencyConverterBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="CurrencyConverter\CurrencyConverterBundle\Entity\Repository\CountryRepository")
  * @ORM\Table(name="countries")
  */
 class Country

@@ -14,7 +14,7 @@ class HomeController extends Controller
      *
      */
     public function indexAction()
-    {
+    {           
         return $this->render('CurrencyConverterCurrencyConverterBundle:Home:index.html.twig');
     }
     
