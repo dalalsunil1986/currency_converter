@@ -6,7 +6,6 @@ use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use CurrencyConverter\CurrencyConverterBundle\Entity\Currency;
 use CurrencyConverter\CurrencyConverterBundle\Entity\Country;
-use CurrencyConverter\CurrencyConverterBundle\Utility\simple_html_dom;
 
 class CurrencyFixtures implements FixtureInterface
 {

@@ -25,9 +25,7 @@ class Country
     /**
      * @ORM\Column(type="string", length=100)
      */
-    protected $country;
-
-   
+    protected $country;   
 
     /**
      * Get id
@@ -38,6 +36,12 @@ class Country
     {
         return $this->id;
     }
+    
+     /**
+     * @ORM\OneToOne(targetEntity="Currency", inversedBy="country")
+     * @ORM\JoinColumn(name="currency_id", referencedColumnName="id")
+     */
+    protected $currency;
 
     /**
      * Set currency_id
@@ -83,5 +87,28 @@ class Country
     public function getCountry()
     {
         return $this->country;
+    }
+
+    /**
+     * Set currency
+     *
+     * @param \CurrencyConverter\CurrencyConverterBundle\Entity\Currency $currency
+     * @return Country
+     */
+    public function setCurrency(\CurrencyConverter\CurrencyConverterBundle\Entity\Currency $currency = null)
+    {
+        $this->currency = $currency;
+
+        return $this;
+    }
+
+    /**
+     * Get currency
+     *
+     * @return \CurrencyConverter\CurrencyConverterBundle\Entity\Currency 
+     */
+    public function getCurrency()
+    {
+        return $this->currency;
     }
 }

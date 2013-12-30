@@ -11,3 +11,9 @@ currency_converter_currency_converter_contact:
     defaults: { _controller: CurrencyConverterCurrencyConverterBundle:Home:contact }
     requirements:
         _method:  GET|POST
+        
+currency_converter_currency_converter_api_load:
+    pattern:  /api/load
+    defaults: { _controller: CurrencyConverterCurrencyConverterBundle:Api:load }
+    requirements:
+        _method:  GET

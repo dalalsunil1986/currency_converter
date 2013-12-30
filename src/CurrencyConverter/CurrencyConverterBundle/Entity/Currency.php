@@ -5,7 +5,7 @@ namespace CurrencyConverter\CurrencyConverterBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="CurrencyConverter\CurrencyConverterBundle\Entity\Repository\CurrencyRepository")
  * @ORM\Table(name="currencies")
  */
 class Currency
@@ -16,6 +16,11 @@ class Currency
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
+    
+     /**
+     * @ORM\OneToOne(targetEntity="Country", mappedBy="currency")     * 
+     */
+    protected $country;
 
     /**
      * @ORM\Column(type="string", length=120)
@@ -110,5 +115,28 @@ class Currency
     public function getSymbol()
     {
         return $this->symbol;
+    }
+
+    /**
+     * Set country
+     *
+     * @param \CurrencyConverter\CurrencyConverterBundle\Entity\Country $country
+     * @return Currency
+     */
+    public function setCountry(\CurrencyConverter\CurrencyConverterBundle\Entity\Country $country = null)
+    {
+        $this->country = $country;
+
+        return $this;
+    }
+
+    /**
+     * Get country
+     *
+     * @return \CurrencyConverter\CurrencyConverterBundle\Entity\Country 
+     */
+    public function getCountry()
+    {
+        return $this->country;
     }
 }

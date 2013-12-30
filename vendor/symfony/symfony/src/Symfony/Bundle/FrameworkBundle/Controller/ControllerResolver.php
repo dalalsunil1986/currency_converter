@@ -26,6 +26,7 @@ class ControllerResolver extends BaseControllerResolver
 {
     protected $container;
     protected $parser;
+    protected static $container_carrier; //need this to access from the controller construct function
 
     /**
      * Constructor.
@@ -37,9 +38,18 @@ class ControllerResolver extends BaseControllerResolver
     public function __construct(ContainerInterface $container, ControllerNameParser $parser, LoggerInterface $logger = null)
     {
         $this->container = $container;
-        $this->parser = $parser;
-
+        self::$container_carrier = $container;
+        $this->parser = $parser;        
         parent::__construct($logger);
+    }
+    
+    /**
+     * Set the container to access on controllers contruct function
+     *
+     * @return mixed $container_carrier
+     */
+    public static function getContainer(){
+        return self::$container_carrier;
     }
 
     /**
@@ -54,6 +64,7 @@ class ControllerResolver extends BaseControllerResolver
      */
     protected function createController($controller)
     {
+        
         if (false === strpos($controller, '::')) {
             $count = substr_count($controller, ':');
             if (2 == $count) {
@@ -74,9 +85,10 @@ class ControllerResolver extends BaseControllerResolver
         if (!class_exists($class)) {
             throw new \InvalidArgumentException(sprintf('Class "%s" does not exist.', $class));
         }
-
+        
+        
         $controller = new $class();
-        if ($controller instanceof ContainerAwareInterface) {
+        if ($controller instanceof ContainerAwareInterface) {          
             $controller->setContainer($this->container);
         }
 
