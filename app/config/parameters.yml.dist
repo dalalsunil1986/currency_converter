@@ -13,6 +13,6 @@ parameters:
     mailer_user: 
     mailer_password:
     locale: en
-    secret:
+    secret: test
     
 
