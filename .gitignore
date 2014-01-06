@@ -5,5 +5,5 @@
 /vendor/
 /app/config/parameters.yml
 /nbproject/private/
-*/Kernel/cache*
-*/Kernel/logs*
+*Kernel/cache*
+*Kernel/logs*
