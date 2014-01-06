@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 parameters:
     database_driver:   pdo_mysql
     database_host:     127.0.0.1
@@ -13,3 +14,23 @@ parameters:
 
     locale:            en
     secret:            ThisTokenIsNotSoSecretChangeIt
+=======
+# These parameters can be imported into other config files
+# by enclosing the key with % (like %database_user%)
+# Comments start with ';', as in php.ini
+parameters:
+    database_driver: pdo_mysql
+    database_host: localhost
+    database_port: 3306
+    database_name: converter
+    database_user: root
+    database_password: 
+    mailer_transport: smtp
+    mailer_host: localhost
+    mailer_user: 
+    mailer_password:
+    locale: en
+    secret: test
+    
+
+>>>>>>> dc0f5659a610cc702ff923fb73fea8713d78d20d
