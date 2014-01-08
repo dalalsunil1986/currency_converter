@@ -10,7 +10,7 @@
 namespace CurrencyConverter\CurrencyConverterBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Bundle\FrameworkBundle\Controller\ControllerResolver;
+use CurrencyConverter\CurrencyConverterBundle\Controller\BaseControllerResolver;
 use Symfony\Component\HttpFoundation\Response;
 
 class BaseController extends Controller
@@ -21,8 +21,9 @@ class BaseController extends Controller
     protected $currency_repository; //exposes the CurrencyRepository object
     
     public function __construct(){        
-       
-        $this->setContainer(ControllerResolver::getContainer());
+        $cr = new BaseControllerResolver();
+        print_r(BaseControllerResolver::getContainer());die();
+        $this->setContainer(BaseControllerResolver::getContainer());
         
         $this->entity_manager = $this->getDoctrine()
                                 ->getManager();
@@ -30,6 +31,8 @@ class BaseController extends Controller
                                     ->getRepository('CurrencyConverterCurrencyConverterBundle:Country');
         $this->currency_repository = $this->entity_manager
                                      ->getRepository('CurrencyConverterCurrencyConverterBundle:Currency');
+                                     
+        
     }
     
     
