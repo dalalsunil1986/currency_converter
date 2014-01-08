@@ -11,8 +11,7 @@ class CurrencyFixtures implements FixtureInterface
 {
     public function load(ObjectManager $manager)
     {
-        
-        
+       
         $var = __DIR__.'\simple_html_dom.php';
         include_once($var);
         $html = file_get_html('http://www.xe.com/iso4217.php');
@@ -124,7 +123,7 @@ class CurrencyFixtures implements FixtureInterface
             }
             
            
-            $currency = new Currency();
+            $currency = new Currency();           
             $currency->setCurrency($item['currency']);
             $currency->setCode($item['code']);
             if(isset($final_symbol)){
@@ -132,15 +131,22 @@ class CurrencyFixtures implements FixtureInterface
                   $currency->setSymbol($final_symbol);
               }
             }
-            $manager->persist($currency);        
+            
+            $manager->persist($currency);
             $manager->flush();
             
-            $country = new Country();
-            $country->setCurrencyId($currency->getId());
+            $currency_id = $currency->getId();
+            
+            $country = new Country();            
+            $country->setCurrencyId($currency_id);
             $country->setCountry($item['country']);
-            $manager->persist($country);        
+            
+           
+            $manager->persist($country);
             $manager->flush();
+            
         }
+        
         
        
     }

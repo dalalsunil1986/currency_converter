@@ -1854,7 +1854,10 @@ class ControllerResolver implements ControllerResolverInterface
 private $logger;
 public function __construct(LoggerInterface $logger = null)
 {
+<<<<<<< HEAD
 print_r('1');
+=======
+>>>>>>> 05a91fff7301dd583899251aeeff8bd5aa4971f5
 $this->logger = $logger;
 }
 public function getController(Request $request)
@@ -1943,7 +1946,10 @@ protected $container;
 protected $parser;
 public function __construct(ContainerInterface $container, ControllerNameParser $parser, LoggerInterface $logger = null)
 {
+<<<<<<< HEAD
 print_r('2');
+=======
+>>>>>>> 05a91fff7301dd583899251aeeff8bd5aa4971f5
 $this->container = $container;
 $this->parser = $parser;
 parent::__construct($logger);
@@ -1965,7 +1971,10 @@ list($class, $method) = explode('::', $controller, 2);
 if (!class_exists($class)) {
 throw new \InvalidArgumentException(sprintf('Class "%s" does not exist.', $class));
 }
+<<<<<<< HEAD
 print_r($this->container);
+=======
+>>>>>>> 05a91fff7301dd583899251aeeff8bd5aa4971f5
 $controller = new $class();
 if ($controller instanceof ContainerAwareInterface) {
 $controller->setContainer($this->container);

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Controller that extends to Symfony controller and
  * let us access the container object during controller's
@@ -12,18 +13,23 @@ namespace CurrencyConverter\CurrencyConverterBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use CurrencyConverter\CurrencyConverterBundle\Controller\BaseControllerResolver;
 use Symfony\Component\HttpFoundation\Response;
+use CurrencyConverter\CurrencyConverterBundle\Kernel\ApiKernel;
 
-class BaseController extends Controller
+class ApiBaseController extends Controller
 {
     
     protected $entity_manager; 
     protected $country_repository; //exposes the CountryRepository object
     protected $currency_repository; //exposes the CurrencyRepository object
     
-    public function __construct(){        
-        $cr = new BaseControllerResolver();
-        print_r(BaseControllerResolver::getContainer());die();
-        $this->setContainer(BaseControllerResolver::getContainer());
+
+    public function __construct(){  
+        
+        $kernel = new ApiKernel('prod', true);
+        $kernel->boot();
+        
+        $this->setContainer($kernel->getContainer());
+
         
         $this->entity_manager = $this->getDoctrine()
                                 ->getManager();
