@@ -7,6 +7,12 @@ use Doctrine\Common\Persistence\ObjectManager;
 use CurrencyConverter\CurrencyConverterBundle\Entity\Currency;
 use CurrencyConverter\CurrencyConverterBundle\Entity\Country;
 
+/**
+ * Running this on the CLI will fill up the database with necessary
+ * data for the application. Run the command "php app/console doctrine:fixtures:load
+ * 
+ */
+
 class CurrencyFixtures implements FixtureInterface
 {
     public function load(ObjectManager $manager)
