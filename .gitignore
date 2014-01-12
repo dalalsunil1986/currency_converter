@@ -4,7 +4,5 @@
 /app/logs/*
 /vendor/
 /app/config/parameters.yml
-/nbproject/*
-/nbproject/private/
 /src/CurrencyConverter/CurrencyConverterBundle/Kernel/cache*
 /src/CurrencyConverter/CurrencyConverterBundle/Kernel/logs*
