@@ -3,3 +3,4 @@ app/config/parameters.ini
 app/config/parameters*
 app/cache*
 app/logs*
+/nbproject/private/

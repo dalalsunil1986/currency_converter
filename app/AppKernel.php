@@ -19,6 +19,7 @@ class AppKernel extends Kernel
             new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
             new Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle(),            
             new CurrencyConverter\CurrencyConverterBundle\CurrencyConverterCurrencyConverterBundle(),
+	    new IAkumaI\SphinxsearchBundle\SphinxsearchBundle()
             //new Blogger\BlogBundle\BloggerBlogBundle(),
         );
 

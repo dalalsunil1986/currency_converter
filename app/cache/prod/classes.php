@@ -1940,16 +1940,11 @@ class ControllerResolver extends BaseControllerResolver
 {
 protected $container;
 protected $parser;
-protected static $container_carrier;
 public function __construct(ContainerInterface $container, ControllerNameParser $parser, LoggerInterface $logger = null)
 {
 $this->container = $container;
-self::$container_carrier = $container;
 $this->parser = $parser;
 parent::__construct($logger);
-}
-public static function getContainer(){
-return self::$container_carrier;
 }
 protected function createController($controller)
 {
