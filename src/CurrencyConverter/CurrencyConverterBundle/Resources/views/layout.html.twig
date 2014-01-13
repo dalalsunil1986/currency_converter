@@ -1,7 +1,17 @@
-{% extends '::currency_coverter_base.html.twig' %}
+{% extends '::currency_converter_base.html.twig' %}
 
 {% block stylesheets %}
     {{ parent() }}
     <link href="{{ asset('bundles/currencyconvertercurrencyconverter/css/currencyconverter.css') }}" type="text/css" rel="stylesheet" />
+    <!-- Custom styles for this template -->
+    <link href="{{ asset('bundles/currencyconvertercurrencyconverter/css/main.css') }}" rel="stylesheet">
+    <link href="{{ asset('bundles/currencyconvertercurrencyconverter/css/font-awesome.min.css') }}" rel="stylesheet">
 {% endblock %}
+    
+    
+{% block javascripts %}  
+    <script src="{{ asset('bundles/currencyconvertercurrencyconverter/js/jribbble.js') }}"></script>
+    <script src="{{ asset('bundles/currencyconvertercurrencyconverter/js/site-ck.js') }}"></script>    
+{% endblock %}
+
 

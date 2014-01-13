@@ -36,11 +36,6 @@ class appProdUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirecta
             return array (  '_controller' => 'CurrencyConverter\\CurrencyConverterBundle\\Controller\\HomeController::indexAction',  '_route' => 'currency_converter_currency_converter_homepage',);
         }
 
-        // currency_converter_currency_converter_about
-        if ($pathinfo === '/about') {
-            return array (  '_controller' => 'CurrencyConverter\\CurrencyConverterBundle\\Controller\\HomeController::aboutAction',  '_route' => 'currency_converter_currency_converter_about',);
-        }
-
         // currency_converter_currency_converter_contact
         if ($pathinfo === '/contact') {
             if (!in_array($this->context->getMethod(), array('GET', 'POST', 'HEAD'))) {
