@@ -7,13 +7,18 @@ use Doctrine\Common\Persistence\ObjectManager;
 use CurrencyConverter\CurrencyConverterBundle\Entity\Currency;
 use CurrencyConverter\CurrencyConverterBundle\Entity\Country;
 
+/**
+ * Running this on the CLI will fill up the database with necessary
+ * data for the application. Run the command "php app/console doctrine:fixtures:load
+ * 
+ */
+
 class CurrencyFixtures implements FixtureInterface
 {
     public function load(ObjectManager $manager)
     {
-        
-        
-        $var = __DIR__.'\simple_html_dom.php';
+       
+        $var = __DIR__.'/simple_html_dom.php';
         include_once($var);
         $html = file_get_html('http://www.xe.com/iso4217.php');
         
@@ -59,7 +64,7 @@ class CurrencyFixtures implements FixtureInterface
             }
            
         }
-        
+       
         foreach($container as $item){          
             
             $next_html = file_get_html($item['link']);                       
@@ -124,7 +129,7 @@ class CurrencyFixtures implements FixtureInterface
             }
             
            
-            $currency = new Currency();
+            $currency = new Currency();           
             $currency->setCurrency($item['currency']);
             $currency->setCode($item['code']);
             if(isset($final_symbol)){
@@ -132,15 +137,20 @@ class CurrencyFixtures implements FixtureInterface
                   $currency->setSymbol($final_symbol);
               }
             }
-            $manager->persist($currency);        
+            
+            $manager->persist($currency);
             $manager->flush();
             
-            $country = new Country();
+            $country = new Country();            
             $country->setCurrencyId($currency->getId());
+            $country->setCurrency($currency);
             $country->setCountry($item['country']);
-            $manager->persist($country);        
+            
+            $manager->persist($country);
             $manager->flush();
+            
         }
+        
         
        
     }

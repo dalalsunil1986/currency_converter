@@ -1,10 +1,93 @@
-.converter-notice { text-align: center; padding: 10px; background: #DFF2BF; border: 1px solid; color: #4F8A10; margin-bottom: 10px; }
-form.converter { font-size: 16px; margin-left: 105px; margin-right: auto }
-form.converter div { clear: left; margin-bottom: 10px; }
-form.converter label { float: left; margin-right: 10px; text-align: right; width: 100px; font-weight: bold; vertical-align: top; padding-top: 10px; }
-form.converter input[type="text"],
-form.converter input[type="email"]
-    { width: 500px; line-height: 26px; font-size: 20px; min-height: 26px; }
-form.converter textarea { width: 500px; height: 150px; line-height: 26px; font-size: 20px; }
-form.converter input[type="submit"] { margin-left: 110px; width: 508px; line-height: 26px; font-size: 20px; min-height: 26px; }
-form.converter ul li { color: #ff0000; margin-bottom: 5px; }
+/*
+ * Author: Joel Capillo
+ * 
+ *
+ * Project Name: Currency Converter
+ * Version: 1.0
+ *
+ */
+h1{
+    font-size: 42px;
+}
+select{
+    padding:5px;
+    width:300px;
+}
+
+select.convert-from{
+    margin-right:40px;
+}
+ 
+select.convert-to{
+    margin-left: 40px;
+}
+
+.textbox-holder
+{
+    margin-top:30px;
+}
+
+.textbox-holder input{
+    padding:5px; 
+}
+
+.textbox-holder.row-fluid .col-lg-3
+{
+    float: none;
+    margin: 0 auto;
+    
+}
+.form-control,
+.btn{
+    height:40px;
+    line-height:30px;
+}
+.btn{
+    line-height: 20px;
+}
+.form-control{
+    font-weight: bold;
+    font-size: 18px;
+    padding-left: 8px;
+}
+::-webkit-input-placeholder { /* WebKit browsers */
+    font-weight: 200;
+    font-size: 16px;
+    font-style: italic;
+}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    font-weight: 200;
+    font-size: 16px;
+    font-style: italic;
+}
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+    font-weight: 200;
+    font-size: 16px;
+    font-style: italic;
+}
+:-ms-input-placeholder { /* Internet Explorer 10+ */
+   font-weight: 200;
+   font-size: 16px;
+   font-style: italic;
+}
+.title-holder{
+    padding-top: 30px;
+}
+
+.hero-block img.mb-7{
+    margin-bottom: 0;
+}
+
+#loading-indicator{
+    background: url(../img/loader.gif) no-repeat right top;
+    height: 15px;
+    width: 20px;
+    margin: 20px 5px 0 0;
+    float: right;    
+}
+.error{
+    color:#FF0000;
+}
+
+
+

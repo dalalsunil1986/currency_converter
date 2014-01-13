@@ -18,15 +18,6 @@ class HomeController extends Controller
        return $this->render('CurrencyConverterCurrencyConverterBundle:Home:index.html.twig');
     }
     
-    /**
-     * Loads the about page
-     *
-     */
-    public function aboutAction()
-    {
-        return $this->render('CurrencyConverterCurrencyConverterBundle:Home:about.html.twig');
-    }
-    
     
     /**
      * Loads the contact page

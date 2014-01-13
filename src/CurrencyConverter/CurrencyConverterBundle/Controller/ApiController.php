@@ -9,7 +9,7 @@ namespace CurrencyConverter\CurrencyConverterBundle\Controller;
 
 use CurrencyConverter\CurrencyConverterBundle\Controller\BaseController;
 
-class ApiController extends BaseController
+class ApiController extends ApiBaseController
 {
     /**
      * Called to fill the dropdown list on the home page
