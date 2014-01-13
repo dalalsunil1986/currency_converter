@@ -1,0 +1,81 @@
+/*
+ * Author: Joel Capillo
+ * 
+ *
+ * Project Name: Currency Converter
+ * Version: 1.0
+ *
+ */
+h1{
+    font-size: 42px;
+}
+select{
+    padding:5px;
+}
+
+select.convert-from{
+    margin-right:40px;
+}
+ 
+select.convert-to{
+    margin-left: 40px;
+}
+
+.textbox-holder
+{
+    margin-top:30px;
+}
+
+.textbox-holder input{
+    padding:5px; 
+}
+
+.textbox-holder.row-fluid .col-lg-3
+{
+    float: none;
+    margin: 0 auto;
+    
+}
+.form-control,
+.btn{
+    height:40px;
+    line-height:30px;
+}
+.btn{
+    line-height: 20px;
+}
+.form-control{
+    font-weight: bold;
+    font-size: 18px;
+    padding-left: 8px;
+}
+::-webkit-input-placeholder { /* WebKit browsers */
+    font-weight: 200;
+    font-size: 16px;
+    font-style: italic;
+}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    font-weight: 200;
+    font-size: 16px;
+    font-style: italic;
+}
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+    font-weight: 200;
+    font-size: 16px;
+    font-style: italic;
+}
+:-ms-input-placeholder { /* Internet Explorer 10+ */
+   font-weight: 200;
+   font-size: 16px;
+   font-style: italic;
+}
+.title-holder{
+    padding-top: 30px;
+}
+
+.hero-block img.mb-7{
+    margin-bottom: 0;
+}
+
+
+

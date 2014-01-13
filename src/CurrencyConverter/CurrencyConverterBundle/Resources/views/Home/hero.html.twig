@@ -1,8 +1,36 @@
-    <div class="hero-block">
-        <img class="img-circle" src="{{ asset('bundles/currencyconvertercurrencyconverter/img/logo.png') }}" width="200" height="200" class="mb-7 hero-image">
-        <p>Hello, I'm Carlos and this is our new theme, Small.<br/>
-        It is extremely easy to configure and use. Designed to show your Dribbble shots.<br/>
-        No complex stuff. Your logo, your shots & your social links. Easy stuff!</p>
+    <div class="row-fluid title-holder">
+            <h1>Currency Converter</h1>
+            <p>A straighforward, simple way to convert currency values.</p>
+    </div>
+   <div class="hero-block">
+       <img src="{{ asset('bundles/currencyconvertercurrencyconverter/img/go.png') }}" class="mb-7 hero-image">
+       <div class="row-fluid">
+            <select ng-model="group.expert_id" name="" class="convert-from" required>
+                <option value="">Convert from:</option>
+                <option>Peso</option>
+                <option>Lenk</option>
+                <option>Pounds</option>
+                <option>Hongkong Dollar</option>            
+            </select>
+
+            <select ng-model="group.expert_id" name="" class="convert-to" required>
+                <option value="">Convert to:</option>
+                <option>Peso</option>
+                <option>Lenk</option>
+                <option>Pounds</option>
+                <option>Hongkong Dollar</option>            
+            </select>
+        </div>
+        <div class="textbox-holder row-fluid">
+            <div class="col-lg-3">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Enter amount to convert.....">
+                    <span class="input-group-btn">
+                       <button class="btn btn-danger" type="button">Convert</button>
+                    </span>
+                </div>
+            </div>
+        </div>
     </div>
     <a href="index.html#work" class="scroll"><span class="down-arrow"></span></a>
 
