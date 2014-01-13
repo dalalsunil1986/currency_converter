@@ -2,35 +2,74 @@
             <h1>Currency Converter</h1>
             <p>A straighforward, simple way to convert currency values.</p>
     </div>
-   <div class="hero-block">
+   <div class="hero-block" ng-controller="page_controller" ng-init="init()">
        <img src="{{ asset('bundles/currencyconvertercurrencyconverter/img/go.png') }}" class="mb-7 hero-image">
-       <div class="row-fluid">
-            <select ng-model="group.expert_id" name="" class="convert-from" required>
-                <option value="">Convert from:</option>
-                <option>Peso</option>
-                <option>Lenk</option>
-                <option>Pounds</option>
-                <option>Hongkong Dollar</option>            
-            </select>
+       
+       <form name = "currency_converter_form" ng-submit="convert()">
+        
+         <div class="row-fluid">
+             <select ng-model="currency_code_input" name="currency_code_input" class="convert-from" required>
+                 <option value="">Convert from:</option>
+                 <option value="{%raw%}{{ item.currency_code }}{%endraw%}"  ng-repeat = "item in currencies">
+                     {%raw%}{{ getSymbol(item.currency_code) }}{%endraw%}
+                     {%raw%}{{ item.currency }}{%endraw%}
+                     {%raw%}{{ item.country }}{%endraw%}
+                 </option>          
+             </select>
 
-            <select ng-model="group.expert_id" name="" class="convert-to" required>
-                <option value="">Convert to:</option>
-                <option>Peso</option>
-                <option>Lenk</option>
-                <option>Pounds</option>
-                <option>Hongkong Dollar</option>            
-            </select>
+             <select ng-model="currency_code_output" name="currency_code_to" class="convert-to" required>
+                 <option value="">Convert to:</option>
+                 <option value="{%raw%}{{ item.currency_code }}{%endraw%}"  ng-repeat = "item in currencies">
+                   {%raw%}{{ getSymbol(item.currency_code) }}{%endraw%}
+                   {%raw%}{{ item.currency }}{%endraw%}
+                   {%raw%}{{ item.country }}{%endraw%}
+                 </option>          
+             </select>
+         </div>
+           
+         <div class="textbox-holder row-fluid">
+             <div class="col-lg-3">
+                 <div class="input-group">
+                     <input type="text" class="form-control" ng-model="amount" placeholder="Enter amount to convert....." name="amount_to_convert" amount-convert required>
+                     <span class="input-group-btn">
+                        <button class="btn btn-danger" type="submit" >Convert</button>
+                     </span>
+                 </div>
+             </div>
+         </div>
+           
+         <span class="error" ng-show="currency_converter_form.$dirty && currency_converter_form.amount_to_convert.$invalid" required>
+           <small class="error" ng-show="currency_converter_form.amount_to_convert.$error.required">
+                   Please enter a valid amount.
+           </small>
+         </span>
+           
+       
+           
+       </form>
+       
+       
+        <!--start for displaying success/error messages-->
+        <div ng-show="resultMessage != null">                                                    
+
+               <div class="text" ng-repeat="item in resultMessage">                                                          
+                    <div class="span4" ng-switch on = "resultMessage.type">  
+                        <div class="alert alert-success success" ng-switch-when = "success">  
+                            <a class="close" data-dismiss="alert">×</a>  
+                            {%raw%}{{ item.responseMsg }}{%endraw%}
+                        </div> 
+                       <div class="alert alert-error error" ng-switch-when = "error">  
+                            <a class="close" data-dismiss="alert">×</a>  
+                            {%raw%}{{ item.responseMsg }}{%endraw%}
+                       </div> 
+                    </div>
+               </div>
         </div>
-        <div class="textbox-holder row-fluid">
-            <div class="col-lg-3">
-                <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Enter amount to convert.....">
-                    <span class="input-group-btn">
-                       <button class="btn btn-danger" type="button">Convert</button>
-                    </span>
-                </div>
-            </div>
-        </div>
+       
+        <!--the indicator for ajax process-->
+        <div id="loading-indicator"></div>
+        <!--the indicator for ajax process-->
+         
     </div>
     <a href="index.html#work" class="scroll"><span class="down-arrow"></span></a>
 

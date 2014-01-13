@@ -11,6 +11,7 @@ h1{
 }
 select{
     padding:5px;
+    width:300px;
 }
 
 select.convert-from{
@@ -75,6 +76,17 @@ select.convert-to{
 
 .hero-block img.mb-7{
     margin-bottom: 0;
+}
+
+#loading-indicator{
+    background: url(../img/loader.gif) no-repeat right top;
+    height: 15px;
+    width: 20px;
+    margin: 20px 5px 0 0;
+    float: right;    
+}
+.error{
+    color:#FF0000;
 }
 
 
