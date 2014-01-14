@@ -31,6 +31,27 @@ ConverterApp.config(['$httpProvider', function($httpProvider) {
     $httpProvider.responseInterceptors.push(interceptor);
     
 }]);
+
+ConverterApp.directive('chosen',function(){
+   var linker = function(scope,element,attrs){
+       var list = attrs['chosen'];
+       element.trigger('chosen:updated');
+       scope.$watch(list,function(){
+	   element.trigger('chosen:updated');
+       });
+       
+       scope.$watch(attrs['ngModel'], function() {
+            element.trigger('chosen:updated');
+       });
+
+       element.chosen();
+   };
+   
+   return{
+     restrict:'A',
+     link: linker
+   }
+});
  
 
 ConverterApp.factory('LoadingIndicatorHandler', function()
@@ -124,7 +145,7 @@ function page_controller($scope, $http){
     //called on page load
     $scope.init = function() {
         console.log('Initializing.......');
-        retrieveCurrencies();
+        retrieveCurrencies();	
     };
     
     $scope.getFlag = function(symbol){
@@ -150,14 +171,10 @@ function page_controller($scope, $http){
      * 
      * @returns {undefined}
      */
-    var retrieveCurrencies = function(){
-        
-         $http.get(currencies_url).success(function(data) {
-            
-             if(!data.error){                  
-                    
-                    $scope.currencies = data.data;
-                    
+    var retrieveCurrencies = function(){        
+         $http.get(currencies_url).success(function(data) {            
+             if(!data.error){                
+                   $scope.currencies = data.data;		   
             }
             else
                //show the result container
@@ -166,8 +183,7 @@ function page_controller($scope, $http){
            
         }).error(function() {            
            handleResponse('error','Something\'s wrong happened.');
-        });
-         
+        });         
     };
     
     

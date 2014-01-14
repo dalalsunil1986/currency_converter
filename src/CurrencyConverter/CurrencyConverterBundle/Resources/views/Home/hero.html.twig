@@ -8,22 +8,10 @@
        <form name = "currency_converter_form" ng-submit="convert()">
         
          <div class="row-fluid">
-             <select ng-model="currency_code_input" name="currency_code_input" class="convert-from" required>
-                 <option value="">Convert from:</option>
-                 <option value="{%raw%}{{ item.currency_code }}{%endraw%}"  ng-repeat = "item in currencies">
-                     {%raw%}{{ getSymbol(item.currency_code) }}{%endraw%}
-                     {%raw%}{{ item.currency }}{%endraw%}
-                     {%raw%}{{ item.country }}{%endraw%}
-                 </option>          
+             <select data-placeholder="Convert from:" tabindex="2" ng-model="currency_code_input" ng-options="item.country for item in currencies" name="currency_code_input" class="convert-from chosen-select" chosen="currencies" required>
              </select>
 
-             <select ng-model="currency_code_output" name="currency_code_to" class="convert-to" required>
-                 <option value="">Convert to:</option>
-                 <option value="{%raw%}{{ item.currency_code }}{%endraw%}"  ng-repeat = "item in currencies">
-                   {%raw%}{{ getSymbol(item.currency_code) }}{%endraw%}
-                   {%raw%}{{ item.currency }}{%endraw%}
-                   {%raw%}{{ item.country }}{%endraw%}
-                 </option>          
+             <select data-placeholder="Convert to:" tabindex="2" ng-options="item.country for item in currencies" ng-model="currency_code_output" name="currency_code_to" class="convert-to chosen-select" chosen="currencies" required>
              </select>
          </div>
            
@@ -37,34 +25,37 @@
                  </div>
              </div>
          </div>
-           
-         <span class="error" ng-show="currency_converter_form.$dirty && currency_converter_form.amount_to_convert.$invalid" required>
-           <small class="error" ng-show="currency_converter_form.amount_to_convert.$error.required">
-                   Please enter a valid amount.
-           </small>
-         </span>
-           
-       
-           
+          
+	   <!--error holder for forms-->
+	   <div class="error-holder row-fluid">
+	    <div class="span3"  ng-show="currency_converter_form.$dirty && currency_converter_form.amount_to_convert.$invalid" required>  
+	       <div class="alert alert-danger error" ng-show="currency_converter_form.amount_to_convert.$error.required">
+		<a class="close" data-dismiss="alert">×</a>      
+		Please enter a valid amount.
+	      </div>
+	    </div> 
+          </div>
+          <!--error holder for forms-->
+	  
        </form>
        
        
-        <!--start for displaying success/error messages-->
-        <div ng-show="resultMessage != null">                                                    
-
-               <div class="text" ng-repeat="item in resultMessage">                                                          
-                    <div class="span4" ng-switch on = "resultMessage.type">  
+        <!--error holder for ajax request-->
+        <div ng-show="resultMessage != null" class="error-holder row-fluid">                                                   
+               <div class="text span" ng-repeat="item in resultMessage">                                                          
+                    <div class="span3" ng-switch on = "resultMessage.type">  
                         <div class="alert alert-success success" ng-switch-when = "success">  
                             <a class="close" data-dismiss="alert">×</a>  
                             {%raw%}{{ item.responseMsg }}{%endraw%}
                         </div> 
-                       <div class="alert alert-error error" ng-switch-when = "error">  
+                       <div class="alert alert-danger error" ng-switch-when = "error">  
                             <a class="close" data-dismiss="alert">×</a>  
                             {%raw%}{{ item.responseMsg }}{%endraw%}
                        </div> 
                     </div>
                </div>
         </div>
+       <!--error holder for ajax request-->
        
         <!--the indicator for ajax process-->
         <div id="loading-indicator"></div>

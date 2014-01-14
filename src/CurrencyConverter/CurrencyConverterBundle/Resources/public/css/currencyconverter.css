@@ -11,10 +11,11 @@ h1{
 }
 select{
     padding:5px;
-    width:300px;
+    width:280px;
 }
 
-select.convert-from{
+select.convert-from
+{
     margin-right:40px;
 }
  
@@ -31,12 +32,28 @@ select.convert-to{
     padding:5px; 
 }
 
-.textbox-holder.row-fluid .col-lg-3
+.textbox-holder.row-fluid .col-lg-3{
+    width:370px;
+}
+
+.textbox-holder.row-fluid .col-lg-3,
+.error-holder.row-fluid .span3
 {
     float: none;
     margin: 0 auto;
     
 }
+
+.error-holder.row-fluid .alert
+{
+    padding:6px;
+}
+
+.error-holder.row-fluid .span3
+{
+    margin-top:20px;
+}
+
 .form-control,
 .btn{
     height:40px;
@@ -88,6 +105,27 @@ select.convert-to{
 .error{
     color:#FF0000;
 }
+.hero-block .chosen-container{
+    width:300px!important;   
+}
+.hero-block a.chosen-single{
+    height:40px;
+    line-height:40px;
+}
+.hero-block .chosen-container-single .chosen-single div b{
+    background: url('../img/chosen-sprite.png') no-repeat 0px 12px;
+}
+.hero-block .chosen-container-active.chosen-with-drop .chosen-single div b {
+  background-position: -18px 15px;
+}
+
+.hero-block .chosen-container .chosen-results li.active-result.highlighted{
+    color:#FFF;
+}
+.hero-block .chosen-container .chosen-results li.active-result{
+    color:#000;
+}
+
 
 
 
