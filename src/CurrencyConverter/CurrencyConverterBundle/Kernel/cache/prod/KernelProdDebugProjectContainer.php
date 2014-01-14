@@ -169,7 +169,7 @@ class KernelProdDebugProjectContainer extends Container
      */
     protected function getAnnotationReaderService()
     {
-        return $this->services['annotation_reader'] = new \Doctrine\Common\Annotations\FileCacheReader(new \Doctrine\Common\Annotations\AnnotationReader(), '/var/www/Symfony/src/CurrencyConverter/CurrencyConverterBundle/Kernel/cache/prod/annotations', true);
+        return $this->services['annotation_reader'] = new \Doctrine\Common\Annotations\FileCacheReader(new \Doctrine\Common\Annotations\AnnotationReader(), 'C:/wamp/www/Symfony/src/CurrencyConverter/CurrencyConverterBundle/Kernel/cache/prod/annotations', true);
     }
 
     /**
@@ -317,7 +317,7 @@ class KernelProdDebugProjectContainer extends Container
         $b = new \Doctrine\DBAL\Configuration();
         $b->setSQLLogger($a);
 
-        return $this->services['doctrine.dbal.default_connection'] = $this->get('doctrine.dbal.connection_factory')->createConnection(array('dbname' => 'converter', 'host' => 'localhost', 'port' => 3306, 'user' => 'root', 'password' => NULL, 'charset' => 'UTF8', 'driver' => 'pdo_mysql', 'driverOptions' => array()), $b, new \Symfony\Bridge\Doctrine\ContainerAwareEventManager($this), array());
+        return $this->services['doctrine.dbal.default_connection'] = $this->get('doctrine.dbal.connection_factory')->createConnection(array('dbname' => 'currency_converter', 'host' => '127.0.0.1', 'port' => NULL, 'user' => 'root', 'password' => NULL, 'charset' => 'UTF8', 'driver' => 'pdo_mysql', 'driverOptions' => array()), $b, new \Symfony\Bridge\Doctrine\ContainerAwareEventManager($this), array());
     }
 
     /**
@@ -331,16 +331,16 @@ class KernelProdDebugProjectContainer extends Container
     protected function getDoctrine_Orm_DefaultEntityManagerService()
     {
         $a = new \Doctrine\Common\Cache\ArrayCache();
-        $a->setNamespace('sf2orm_default_ff963585874c32a928d489aebeac01fae3eecfc76fa22fe4bee535207773dcb4');
+        $a->setNamespace('sf2orm_default_51e6b65309cebb62effe1a053beb66fddb36ff944cd2ef2fe61b91b3e77a8d38');
 
         $b = new \Doctrine\Common\Cache\ArrayCache();
-        $b->setNamespace('sf2orm_default_ff963585874c32a928d489aebeac01fae3eecfc76fa22fe4bee535207773dcb4');
+        $b->setNamespace('sf2orm_default_51e6b65309cebb62effe1a053beb66fddb36ff944cd2ef2fe61b91b3e77a8d38');
 
         $c = new \Doctrine\Common\Cache\ArrayCache();
-        $c->setNamespace('sf2orm_default_ff963585874c32a928d489aebeac01fae3eecfc76fa22fe4bee535207773dcb4');
+        $c->setNamespace('sf2orm_default_51e6b65309cebb62effe1a053beb66fddb36ff944cd2ef2fe61b91b3e77a8d38');
 
         $d = new \Doctrine\ORM\Mapping\Driver\DriverChain();
-        $d->addDriver(new \Doctrine\ORM\Mapping\Driver\AnnotationDriver($this->get('annotation_reader'), array(0 => '/var/www/Symfony/src/CurrencyConverter/CurrencyConverterBundle/Entity')), 'CurrencyConverter\\CurrencyConverterBundle\\Entity');
+        $d->addDriver(new \Doctrine\ORM\Mapping\Driver\AnnotationDriver($this->get('annotation_reader'), array(0 => 'C:\\wamp\\www\\Symfony\\src\\CurrencyConverter\\CurrencyConverterBundle\\Entity')), 'CurrencyConverter\\CurrencyConverterBundle\\Entity');
 
         $e = new \Doctrine\ORM\Configuration();
         $e->setEntityNamespaces(array('CurrencyConverterCurrencyConverterBundle' => 'CurrencyConverter\\CurrencyConverterBundle\\Entity'));
@@ -348,7 +348,7 @@ class KernelProdDebugProjectContainer extends Container
         $e->setQueryCacheImpl($b);
         $e->setResultCacheImpl($c);
         $e->setMetadataDriverImpl($d);
-        $e->setProxyDir('/var/www/Symfony/src/CurrencyConverter/CurrencyConverterBundle/Kernel/cache/prod/doctrine/orm/Proxies');
+        $e->setProxyDir('C:/wamp/www/Symfony/src/CurrencyConverter/CurrencyConverterBundle/Kernel/cache/prod/doctrine/orm/Proxies');
         $e->setProxyNamespace('Proxies');
         $e->setAutoGenerateProxyClasses(true);
         $e->setClassMetadataFactoryName('Doctrine\\ORM\\Mapping\\ClassMetadataFactory');
@@ -411,7 +411,7 @@ class KernelProdDebugProjectContainer extends Container
      */
     protected function getFileLocatorService()
     {
-        return $this->services['file_locator'] = new \Symfony\Component\HttpKernel\Config\FileLocator($this->get('kernel'), '/var/www/Symfony/src/CurrencyConverter/CurrencyConverterBundle/Kernel/Resources');
+        return $this->services['file_locator'] = new \Symfony\Component\HttpKernel\Config\FileLocator($this->get('kernel'), 'C:/wamp/www/Symfony/src/CurrencyConverter/CurrencyConverterBundle/Kernel/Resources');
     }
 
     /**
@@ -1162,7 +1162,7 @@ class KernelProdDebugProjectContainer extends Container
      */
     protected function getRouterService()
     {
-        return $this->services['router'] = new \Symfony\Bundle\FrameworkBundle\Routing\Router($this, '/var/www/Symfony/src/CurrencyConverter/CurrencyConverterBundle/Kernel/config/routing.yml', array('cache_dir' => '/var/www/Symfony/src/CurrencyConverter/CurrencyConverterBundle/Kernel/cache/prod', 'debug' => true, 'generator_class' => 'Symfony\\Component\\Routing\\Generator\\UrlGenerator', 'generator_base_class' => 'Symfony\\Component\\Routing\\Generator\\UrlGenerator', 'generator_dumper_class' => 'Symfony\\Component\\Routing\\Generator\\Dumper\\PhpGeneratorDumper', 'generator_cache_class' => 'KernelProdUrlGenerator', 'matcher_class' => 'Symfony\\Bundle\\FrameworkBundle\\Routing\\RedirectableUrlMatcher', 'matcher_base_class' => 'Symfony\\Bundle\\FrameworkBundle\\Routing\\RedirectableUrlMatcher', 'matcher_dumper_class' => 'Symfony\\Component\\Routing\\Matcher\\Dumper\\PhpMatcherDumper', 'matcher_cache_class' => 'KernelProdUrlMatcher', 'strict_requirements' => NULL), $this->get('router.request_context', ContainerInterface::NULL_ON_INVALID_REFERENCE), NULL);
+        return $this->services['router'] = new \Symfony\Bundle\FrameworkBundle\Routing\Router($this, 'C:/wamp/www/Symfony/src/CurrencyConverter/CurrencyConverterBundle/Kernel/config/routing.yml', array('cache_dir' => 'C:/wamp/www/Symfony/src/CurrencyConverter/CurrencyConverterBundle/Kernel/cache/prod', 'debug' => true, 'generator_class' => 'Symfony\\Component\\Routing\\Generator\\UrlGenerator', 'generator_base_class' => 'Symfony\\Component\\Routing\\Generator\\UrlGenerator', 'generator_dumper_class' => 'Symfony\\Component\\Routing\\Generator\\Dumper\\PhpGeneratorDumper', 'generator_cache_class' => 'KernelProdUrlGenerator', 'matcher_class' => 'Symfony\\Bundle\\FrameworkBundle\\Routing\\RedirectableUrlMatcher', 'matcher_base_class' => 'Symfony\\Bundle\\FrameworkBundle\\Routing\\RedirectableUrlMatcher', 'matcher_dumper_class' => 'Symfony\\Component\\Routing\\Matcher\\Dumper\\PhpMatcherDumper', 'matcher_cache_class' => 'KernelProdUrlMatcher', 'strict_requirements' => NULL), $this->get('router.request_context', ContainerInterface::NULL_ON_INVALID_REFERENCE), NULL);
     }
 
     /**
@@ -1221,7 +1221,7 @@ class KernelProdDebugProjectContainer extends Container
      */
     protected function getSecurity_SecureRandomService()
     {
-        return $this->services['security.secure_random'] = new \Symfony\Component\Security\Core\Util\SecureRandom('/var/www/Symfony/src/CurrencyConverter/CurrencyConverterBundle/Kernel/cache/prod/secure_random.seed', NULL);
+        return $this->services['security.secure_random'] = new \Symfony\Component\Security\Core\Util\SecureRandom('C:/wamp/www/Symfony/src/CurrencyConverter/CurrencyConverterBundle/Kernel/cache/prod/secure_random.seed', NULL);
     }
 
     /**
@@ -1260,7 +1260,7 @@ class KernelProdDebugProjectContainer extends Container
      */
     protected function getSession_Storage_FilesystemService()
     {
-        return $this->services['session.storage.filesystem'] = new \Symfony\Component\HttpFoundation\Session\Storage\MockFileSessionStorage('/var/www/Symfony/src/CurrencyConverter/CurrencyConverterBundle/Kernel/cache/prod/sessions', 'MOCKSESSID', $this->get('session.storage.metadata_bag'));
+        return $this->services['session.storage.filesystem'] = new \Symfony\Component\HttpFoundation\Session\Storage\MockFileSessionStorage('C:/wamp/www/Symfony/src/CurrencyConverter/CurrencyConverterBundle/Kernel/cache/prod/sessions', 'MOCKSESSID', $this->get('session.storage.metadata_bag'));
     }
 
     /**
@@ -1697,7 +1697,7 @@ class KernelProdDebugProjectContainer extends Container
      */
     protected function getTranslator_DefaultService()
     {
-        return $this->services['translator.default'] = new \Symfony\Bundle\FrameworkBundle\Translation\Translator($this, $this->get('translator.selector'), array('translation.loader.php' => array(0 => 'php'), 'translation.loader.yml' => array(0 => 'yml'), 'translation.loader.xliff' => array(0 => 'xlf', 1 => 'xliff'), 'translation.loader.po' => array(0 => 'po'), 'translation.loader.mo' => array(0 => 'mo'), 'translation.loader.qt' => array(0 => 'ts'), 'translation.loader.csv' => array(0 => 'csv'), 'translation.loader.res' => array(0 => 'res'), 'translation.loader.dat' => array(0 => 'dat'), 'translation.loader.ini' => array(0 => 'ini'), 'translation.loader.json' => array(0 => 'json')), array('cache_dir' => '/var/www/Symfony/src/CurrencyConverter/CurrencyConverterBundle/Kernel/cache/prod/translations', 'debug' => true));
+        return $this->services['translator.default'] = new \Symfony\Bundle\FrameworkBundle\Translation\Translator($this, $this->get('translator.selector'), array('translation.loader.php' => array(0 => 'php'), 'translation.loader.yml' => array(0 => 'yml'), 'translation.loader.xliff' => array(0 => 'xlf', 1 => 'xliff'), 'translation.loader.po' => array(0 => 'po'), 'translation.loader.mo' => array(0 => 'mo'), 'translation.loader.qt' => array(0 => 'ts'), 'translation.loader.csv' => array(0 => 'csv'), 'translation.loader.res' => array(0 => 'res'), 'translation.loader.dat' => array(0 => 'dat'), 'translation.loader.ini' => array(0 => 'ini'), 'translation.loader.json' => array(0 => 'json')), array('cache_dir' => 'C:/wamp/www/Symfony/src/CurrencyConverter/CurrencyConverterBundle/Kernel/cache/prod/translations', 'debug' => true));
     }
 
     /**
@@ -1710,7 +1710,7 @@ class KernelProdDebugProjectContainer extends Container
      */
     protected function getUriSignerService()
     {
-        return $this->services['uri_signer'] = new \Symfony\Component\HttpKernel\UriSigner('test');
+        return $this->services['uri_signer'] = new \Symfony\Component\HttpKernel\UriSigner('ThisTokenIsNotSoSecretChangeIt');
     }
 
     /**
@@ -1821,7 +1821,7 @@ class KernelProdDebugProjectContainer extends Container
      */
     protected function getValidator_Mapping_ClassMetadataFactoryService()
     {
-        return $this->services['validator.mapping.class_metadata_factory'] = new \Symfony\Component\Validator\Mapping\ClassMetadataFactory(new \Symfony\Component\Validator\Mapping\Loader\LoaderChain(array(0 => new \Symfony\Component\Validator\Mapping\Loader\AnnotationLoader($this->get('annotation_reader')), 1 => new \Symfony\Component\Validator\Mapping\Loader\StaticMethodLoader(), 2 => new \Symfony\Component\Validator\Mapping\Loader\XmlFilesLoader(array(0 => '/var/www/Symfony/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/config/validation.xml')), 3 => new \Symfony\Component\Validator\Mapping\Loader\YamlFilesLoader(array()))), NULL);
+        return $this->services['validator.mapping.class_metadata_factory'] = new \Symfony\Component\Validator\Mapping\ClassMetadataFactory(new \Symfony\Component\Validator\Mapping\Loader\LoaderChain(array(0 => new \Symfony\Component\Validator\Mapping\Loader\AnnotationLoader($this->get('annotation_reader')), 1 => new \Symfony\Component\Validator\Mapping\Loader\StaticMethodLoader(), 2 => new \Symfony\Component\Validator\Mapping\Loader\XmlFilesLoader(array(0 => 'C:\\wamp\\www\\Symfony\\vendor\\symfony\\symfony\\src\\Symfony\\Component\\Form/Resources/config/validation.xml')), 3 => new \Symfony\Component\Validator\Mapping\Loader\YamlFilesLoader(array()))), NULL);
     }
 
     /**
@@ -1875,12 +1875,12 @@ class KernelProdDebugProjectContainer extends Container
     protected function getDefaultParameters()
     {
         return array(
-            'kernel.root_dir' => '/var/www/Symfony/src/CurrencyConverter/CurrencyConverterBundle/Kernel',
+            'kernel.root_dir' => 'C:/wamp/www/Symfony/src/CurrencyConverter/CurrencyConverterBundle/Kernel',
             'kernel.environment' => 'prod',
             'kernel.debug' => true,
             'kernel.name' => 'Kernel',
-            'kernel.cache_dir' => '/var/www/Symfony/src/CurrencyConverter/CurrencyConverterBundle/Kernel/cache/prod',
-            'kernel.logs_dir' => '/var/www/Symfony/src/CurrencyConverter/CurrencyConverterBundle/Kernel/logs',
+            'kernel.cache_dir' => 'C:/wamp/www/Symfony/src/CurrencyConverter/CurrencyConverterBundle/Kernel/cache/prod',
+            'kernel.logs_dir' => 'C:/wamp/www/Symfony/src/CurrencyConverter/CurrencyConverterBundle/Kernel/logs',
             'kernel.bundles' => array(
                 'DoctrineBundle' => 'Doctrine\\Bundle\\DoctrineBundle\\DoctrineBundle',
                 'FrameworkBundle' => 'Symfony\\Bundle\\FrameworkBundle\\FrameworkBundle',
@@ -1890,17 +1890,17 @@ class KernelProdDebugProjectContainer extends Container
             'kernel.charset' => 'UTF-8',
             'kernel.container_class' => 'KernelProdDebugProjectContainer',
             'database_driver' => 'pdo_mysql',
-            'database_host' => 'localhost',
-            'database_port' => 3306,
-            'database_name' => 'converter',
+            'database_host' => '127.0.0.1',
+            'database_port' => NULL,
+            'database_name' => 'currency_converter',
             'database_user' => 'root',
             'database_password' => NULL,
             'mailer_transport' => 'smtp',
-            'mailer_host' => 'localhost',
+            'mailer_host' => '127.0.0.1',
             'mailer_user' => NULL,
             'mailer_password' => NULL,
             'locale' => 'en',
-            'secret' => 'test',
+            'secret' => 'ThisTokenIsNotSoSecretChangeIt',
             'doctrine.dbal.logger.chain.class' => 'Doctrine\\DBAL\\Logging\\LoggerChain',
             'doctrine.dbal.logger.profiling.class' => 'Doctrine\\DBAL\\Logging\\DebugStack',
             'doctrine.dbal.logger.class' => 'Symfony\\Bridge\\Doctrine\\Logger\\DbalLogger',
@@ -1957,7 +1957,7 @@ class KernelProdDebugProjectContainer extends Container
             'doctrine.orm.naming_strategy.default.class' => 'Doctrine\\ORM\\Mapping\\DefaultNamingStrategy',
             'doctrine.orm.naming_strategy.underscore.class' => 'Doctrine\\ORM\\Mapping\\UnderscoreNamingStrategy',
             'doctrine.orm.auto_generate_proxy_classes' => true,
-            'doctrine.orm.proxy_dir' => '/var/www/Symfony/src/CurrencyConverter/CurrencyConverterBundle/Kernel/cache/prod/doctrine/orm/Proxies',
+            'doctrine.orm.proxy_dir' => 'C:/wamp/www/Symfony/src/CurrencyConverter/CurrencyConverterBundle/Kernel/cache/prod/doctrine/orm/Proxies',
             'doctrine.orm.proxy_namespace' => 'Proxies',
             'controller_resolver.class' => 'Symfony\\Bundle\\FrameworkBundle\\Controller\\ControllerResolver',
             'controller_name_converter.class' => 'Symfony\\Bundle\\FrameworkBundle\\Controller\\ControllerNameParser',
@@ -2010,9 +2010,9 @@ class KernelProdDebugProjectContainer extends Container
             'debug.errors_logger_listener.class' => 'Symfony\\Component\\HttpKernel\\EventListener\\ErrorsLoggerListener',
             'debug.event_dispatcher.class' => 'Symfony\\Component\\HttpKernel\\Debug\\TraceableEventDispatcher',
             'debug.stopwatch.class' => 'Symfony\\Component\\Stopwatch\\Stopwatch',
-            'debug.container.dump' => '/var/www/Symfony/src/CurrencyConverter/CurrencyConverterBundle/Kernel/cache/prod/KernelProdDebugProjectContainer.xml',
+            'debug.container.dump' => 'C:/wamp/www/Symfony/src/CurrencyConverter/CurrencyConverterBundle/Kernel/cache/prod/KernelProdDebugProjectContainer.xml',
             'debug.controller_resolver.class' => 'Symfony\\Component\\HttpKernel\\Controller\\TraceableControllerResolver',
-            'kernel.secret' => 'test',
+            'kernel.secret' => 'ThisTokenIsNotSoSecretChangeIt',
             'kernel.http_method_override' => true,
             'kernel.trusted_hosts' => array(
 
@@ -2035,7 +2035,7 @@ class KernelProdDebugProjectContainer extends Container
             'session.storage.options' => array(
 
             ),
-            'session.save_path' => '/var/www/Symfony/src/CurrencyConverter/CurrencyConverterBundle/Kernel/cache/prod/sessions',
+            'session.save_path' => 'C:/wamp/www/Symfony/src/CurrencyConverter/CurrencyConverterBundle/Kernel/cache/prod/sessions',
             'session.metadata.update_threshold' => '0',
             'security.secure_random.class' => 'Symfony\\Component\\Security\\Core\\Util\\SecureRandom',
             'form.resolved_type_factory.class' => 'Symfony\\Component\\Form\\ResolvedFormTypeFactory',
@@ -2059,7 +2059,7 @@ class KernelProdDebugProjectContainer extends Container
             'validator.mapping.loader.yaml_files_loader.class' => 'Symfony\\Component\\Validator\\Mapping\\Loader\\YamlFilesLoader',
             'validator.validator_factory.class' => 'Symfony\\Bundle\\FrameworkBundle\\Validator\\ConstraintValidatorFactory',
             'validator.mapping.loader.xml_files_loader.mapping_files' => array(
-                0 => '/var/www/Symfony/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/config/validation.xml',
+                0 => 'C:\\wamp\\www\\Symfony\\vendor\\symfony\\symfony\\src\\Symfony\\Component\\Form/Resources/config/validation.xml',
             ),
             'validator.mapping.loader.yaml_files_loader.mapping_files' => array(
 
@@ -2090,7 +2090,7 @@ class KernelProdDebugProjectContainer extends Container
             'router.request_context.host' => 'localhost',
             'router.request_context.scheme' => 'http',
             'router.request_context.base_url' => '',
-            'router.resource' => '/var/www/Symfony/src/CurrencyConverter/CurrencyConverterBundle/Kernel/config/routing.yml',
+            'router.resource' => 'C:/wamp/www/Symfony/src/CurrencyConverter/CurrencyConverterBundle/Kernel/config/routing.yml',
             'router.cache_class_prefix' => 'KernelProd',
             'request_listener.http_port' => 80,
             'request_listener.https_port' => 443,

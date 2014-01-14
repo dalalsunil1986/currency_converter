@@ -129,8 +129,9 @@ class CurrencyFixtures implements FixtureInterface
             }
             
            
-            $currency = new Currency();           
-            $currency->setCurrency($item['currency']);
+            $currency = new Currency();
+	    $currency_name = trim(preg_replace('/ +/', ' ', preg_replace('/[^A-Za-z0-9 ]/', ' ', urldecode(html_entity_decode(strip_tags($item['currency']))))));
+            $currency->setCurrency($currency_name);
             $currency->setCode($item['code']);
             if(isset($final_symbol)){
               if(strlen($final_symbol) > 0){
@@ -143,9 +144,9 @@ class CurrencyFixtures implements FixtureInterface
             
             $country = new Country();            
             $country->setCurrencyId($currency->getId());
-            $country->setCurrency($currency);
-            $country->setCountry($item['country']);
-            
+            $country->setCurrency($currency);            
+            $country_name = trim(preg_replace('/ +/', ' ', preg_replace('/[^A-Za-z0-9 ]/', ' ', urldecode(html_entity_decode(strip_tags($item['country']))))));
+	    $country->setCountry($country_name);
             $manager->persist($country);
             $manager->flush();
             
