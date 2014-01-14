@@ -9,18 +9,10 @@
 h1{
     font-size: 42px;
 }
-select{
-    padding:5px;
-    width:280px;
-}
-
-select.convert-from
-{
-    margin-right:40px;
-}
- 
-select.convert-to{
-    margin-left: 40px;
+.hero-block .span4{
+   margin: 0 auto;
+   float: none;
+   display: inline-block;
 }
 
 .textbox-holder
@@ -29,7 +21,7 @@ select.convert-to{
 }
 
 .textbox-holder input{
-    padding:5px; 
+    padding:5px 5px 5px 20px; 
 }
 
 .textbox-holder.row-fluid .col-lg-3{
@@ -46,12 +38,12 @@ select.convert-to{
 
 .error-holder.row-fluid .alert
 {
-    padding:6px;
+    padding:0;
 }
 
 .error-holder.row-fluid .span3
 {
-    margin-top:20px;
+    margin-top:40px;
 }
 
 .form-control,
@@ -64,9 +56,9 @@ select.convert-to{
 }
 .form-control{
     font-weight: bold;
-    font-size: 18px;
-    padding-left: 8px;
+    font-size: 18px;   
 }
+
 ::-webkit-input-placeholder { /* WebKit browsers */
     font-weight: 200;
     font-size: 16px;
@@ -108,6 +100,7 @@ select.convert-to{
 .hero-block .chosen-container{
     width:300px!important;   
 }
+
 .hero-block a.chosen-single{
     height:40px;
     line-height:40px;
@@ -124,6 +117,15 @@ select.convert-to{
 }
 .hero-block .chosen-container .chosen-results li.active-result{
     color:#000;
+    text-align: left;
+    font-weight: bold;
+}
+.hero-block .flag-holder{
+    margin-bottom: 10px;
+}
+
+.hero-block .chosen-container a{
+    font-size:14px;
 }
 
 

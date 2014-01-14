@@ -41,7 +41,7 @@ ConverterApp.directive('chosen',function(){
        });
        
        scope.$watch(attrs['ngModel'], function() {
-            element.trigger('chosen:updated');
+          element.trigger('chosen:updated');
        });
 
        element.chosen();
@@ -144,27 +144,23 @@ function page_controller($scope, $http){
     
     //called on page load
     $scope.init = function() {
-        console.log('Initializing.......');
         retrieveCurrencies();	
     };
     
+    //gets the url for the flag icon
     $scope.getFlag = function(symbol){
-        var url = 'http://s.xe.com/v2/themes/xe/images/flags/big/'+symbol.toLowerCase()+'.png';
-        return "background-image:url("+url+");";
-    };
-    
-    $scope.getSymbol = function(symbol){
-        if(symbol !== undefined && symbol && symbol !== null){
-            return "( "+symbol+" )";
-        }
-        else{
-            return "";
+        if(undefined !== symbol){               
+            var url = 'http://s.xe.com/v2/themes/xe/images/flags/big/'+symbol.toLowerCase()+'.png';
+            return url;
         }
     };
     
+    //submits and create a request
     $scope.convert = function(){
        console.log('Submitting.....'); 
     };
+    
+    
     
     /**
      * This do an ajax call and fill-up the dropdown list with currencies.

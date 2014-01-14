@@ -11,14 +11,9 @@
    {
      width: 260px;
    }
-  select.convert-to{
-    margin-left: 0;    
-    margin-top:20px;   
-  }
-  select.convert-from{
-    margin-right: 0;
-    margin-top:20px;
-  }   
+   .hero-block .span4.right{
+       margin-top:20px;
+   }
 }
 
 
@@ -27,12 +22,7 @@
     {
         width: 250px;
     }
-  select.convert-to{
-    margin-left: 0;
-    margin-top:20px;   
-  }
-  select.convert-from{
-    margin-right: 0;
-    margin-top:20px;
-  }   
+  .hero-block .span4.right{
+       margin-top:20px;
+   }
 }

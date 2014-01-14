@@ -1,6 +1,6 @@
     <div class="row-fluid title-holder">
             <h1>Currency Converter</h1>
-            <p>A straighforward, simple way to convert currency values.</p>
+            <p>A simple, straightforward way to convert currency values.</p>
     </div>
    <div class="hero-block" ng-controller="page_controller" ng-init="init()">
        <img src="{{ asset('bundles/currencyconvertercurrencyconverter/img/go.png') }}" class="mb-7 hero-image">
@@ -8,11 +8,20 @@
        <form name = "currency_converter_form" ng-submit="convert()">
         
          <div class="row-fluid">
-             <select data-placeholder="Convert from:" tabindex="2" ng-model="currency_code_input" ng-options="item.country for item in currencies" name="currency_code_input" class="convert-from chosen-select" chosen="currencies" required>
-             </select>
-
-             <select data-placeholder="Convert to:" tabindex="2" ng-options="item.country for item in currencies" ng-model="currency_code_output" name="currency_code_to" class="convert-to chosen-select" chosen="currencies" required>
-             </select>
+             <div class="span4 left">
+                 <div ng-show="currency_code_input.currency_code != undefined && currency_code_input.currency_code != ''" class="flag-holder">
+                     <img width="50" height="30" src="{%raw%}{{ getFlag(currency_code_input.currency_code) }}{%endraw%}" />
+                 </div>
+                 <select data-placeholder="Select input currency:" tabindex="2" ng-model="currency_code_input" ng-options="item.currency_info for item in currencies" name="currency_code_input" class="convert-from chosen-select" chosen="currencies" required>
+                 </select>
+             </div>
+             <div class="span4 right">
+                 <div ng-show="currency_code_output.currency_code != undefined && currency_code_output.currency_code != ''" class="flag-holder">
+                     <img  src="{%raw%}{{ getFlag(currency_code_output.currency_code) }}{%endraw%}" width="50" height="30" />
+                 </div>
+                 <select data-placeholder="Select output currency:" tabindex="2" ng-options="item.currency_info for item in currencies" ng-model="currency_code_output" name="currency_code_to" class="convert-to chosen-select" chosen="currencies" required>
+                 </select>
+             </div>
          </div>
            
          <div class="textbox-holder row-fluid">
@@ -28,12 +37,17 @@
           
 	   <!--error holder for forms-->
 	   <div class="error-holder row-fluid">
-	    <div class="span3"  ng-show="currency_converter_form.$dirty && currency_converter_form.amount_to_convert.$invalid" required>  
-	       <div class="alert alert-danger error" ng-show="currency_converter_form.amount_to_convert.$error.required">
-		<a class="close" data-dismiss="alert">×</a>      
-		Please enter a valid amount.
-	      </div>
-	    </div> 
+                <div class="span3"  ng-show="currency_converter_form.$dirty">  
+                    <div class="alert alert-danger error" ng-show="currency_converter_form.amount_to_convert.$invalid && !currency_converter_form.currency_code_input.$error.required && !currency_converter_form.currency_code_to.$error.required">
+                            Please enter a valid amount.
+                    </div>
+                    <div class="alert alert-danger error" ng-show="currency_converter_form.currency_code_input.$error.required">
+                            Please select input currency.
+                    </div>
+                     <div class="alert alert-danger error" ng-show="currency_converter_form.currency_code_to.$error.required && !currency_converter_form.currency_code_input.$error.required">
+                            Please select output currency.
+                    </div>
+                </div> 
           </div>
           <!--error holder for forms-->
 	  

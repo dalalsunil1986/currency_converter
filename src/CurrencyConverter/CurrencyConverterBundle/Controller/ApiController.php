@@ -29,11 +29,29 @@ class ApiController extends ApiBaseController
                throw new \Exception('No data found');
                 
             foreach($countries as $country){
+                
+                $symbol = $country->getCurrency()->getSymbol();
+                $currency = $country->getCurrency()->getCurrency();
+                $country_name = $country->getCountry();
+                $currency_code = $country->getCurrency()->getCode();
+                
                 $data['currency_id'] = $country->getCurrency()->getId();            
-                $data['currency_code'] = $country->getCurrency()->getCode();
-                $data['currency_symbol'] = $country->getCurrency()->getSymbol();
-                $data['currency'] = $country->getCurrency()->getCurrency();
-                $data['country'] = $country->getCountry();
+                $data['currency_code'] = $currency_code;
+                $data['currency_symbol'] = $symbol;
+                $data['currency'] = $currency;
+                $data['country'] = $country_name;
+                
+                if(!$currency_code || $currency_code == null){
+                    $currency_code = '';
+                }
+                else{
+                    $currency_code = '('.$currency_code.')';
+                }
+                
+                $data['currency_info'] = $currency_code.' '.$currency.' '.$country_name;
+                
+                
+                
                 $result[]= $data;
             }
             
