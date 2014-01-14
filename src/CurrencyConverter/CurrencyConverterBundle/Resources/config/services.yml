@@ -1,0 +1,7 @@
+parameters:
+#    currency_converter_currency_converter.example.class: CurrencyConverter\CurrencyConverterBundle\Example
+
+services:
+#    currency_converter_currency_converter.example:
+#        class: %currency_converter_currency_converter.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

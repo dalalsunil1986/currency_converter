@@ -1,0 +1,8 @@
+#blogger_blog:
+    #resource: "@BloggerBlogBundle/Resources/config/routing.yml"
+    #prefix:   /blog
+    
+currency_converter:
+    resource: "@CurrencyConverterCurrencyConverterBundle/Resources/config/routing.yml"
+    prefix:   /
+

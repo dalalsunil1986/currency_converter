@@ -1,0 +1,15 @@
+currency_converter_currency_converter_homepage:
+    pattern:  /
+    defaults: { _controller: CurrencyConverterCurrencyConverterBundle:Home:index }    
+
+currency_converter_currency_converter_contact:
+    pattern:  /contact
+    defaults: { _controller: CurrencyConverterCurrencyConverterBundle:Home:contact }
+    requirements:
+        _method:  GET|POST
+        
+currency_converter_currency_converter_api_load:
+    pattern:  /api/load
+    defaults: { _controller: CurrencyConverterCurrencyConverterBundle:Api:load }
+    requirements:
+        _method:  GET
