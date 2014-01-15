@@ -3,9 +3,10 @@
             <p>A simple, straightforward way to convert currency values.</p>
     </div>
    <div class="hero-block" ng-controller="page_controller" ng-init="init()">
+       
        <img src="{{ asset('bundles/currencyconvertercurrencyconverter/img/go.png') }}" class="mb-7 hero-image">
        
-       <form name = "currency_converter_form" ng-submit="convert()">
+       <form ng-show="showResult == false" name = "currency_converter_form" ng-submit="convert()">
         
          <div class="row-fluid">
 
@@ -56,6 +57,21 @@
           <!--error holder for forms-->
 	  
        </form>
+       
+       <div class="result-container row-fluid" ng-show="showResult">
+	   <div class = "span3 input-currency">
+		<span class="symbol">{%raw%}{{currency_code_input.currency_symbol}}{%endraw%}</span>
+		<span class="amount">{%raw%}{{amount}}{%endraw%}</span>
+		<span class="code">({%raw%}{{currency_code_input.currency_code}}{%endraw%})</span>
+	   </div>
+	   <div class="span1"><img src="{{ asset('bundles/currencyconvertercurrencyconverter/img/equals.png') }}" /></div>
+	   <div class="span3 output-currency">
+		<span class="symbol">{%raw%}{{currency_code_output.currency_symbol}}{%endraw%}</span>
+		<span class="amount">{%raw%}{{resultAmount}}{%endraw%}</span>
+		<span class="code">({%raw%}{{currency_code_output.currency_code}}{%endraw%})</span>
+	   </div> 
+       </div>
+       <button class="btn btn-danger reset" type="button" ng-show="showResult" ng-click="reset()">Clear</button>
        
        
         <!--error holder for ajax request-->

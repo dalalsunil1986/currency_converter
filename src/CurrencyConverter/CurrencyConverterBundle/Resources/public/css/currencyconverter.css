@@ -38,20 +38,16 @@ h1{
 
 .error-holder.row-fluid .alert
 {
-<<<<<<< HEAD
+
     padding:0;
-=======
-    padding:6px;
->>>>>>> 8e8e5d92fad6924dc5f9ced68bfdd4639ba20b8d
+
 }
 
 .error-holder.row-fluid .span3
 {
-<<<<<<< HEAD
+
     margin-top:40px;
-=======
-    margin-top:20px;
->>>>>>> 8e8e5d92fad6924dc5f9ced68bfdd4639ba20b8d
+
 }
 
 .form-control,
@@ -108,10 +104,7 @@ h1{
 .hero-block .chosen-container{
     width:300px!important;   
 }
-<<<<<<< HEAD
 
-=======
->>>>>>> 8e8e5d92fad6924dc5f9ced68bfdd4639ba20b8d
 .hero-block a.chosen-single{
     height:40px;
     line-height:40px;
@@ -128,7 +121,7 @@ h1{
 }
 .hero-block .chosen-container .chosen-results li.active-result{
     color:#000;
-<<<<<<< HEAD
+
     text-align: left;
     font-weight: bold;
 }
@@ -138,8 +131,28 @@ h1{
 
 .hero-block .chosen-container a{
     font-size:14px;
-=======
->>>>>>> 8e8e5d92fad6924dc5f9ced68bfdd4639ba20b8d
+
+}
+.hero-block .result-container{
+    color:#000;
+    font-size: 46px;  
+}
+.hero-block a.reset{
+    font-size:14px;
+    color:red;
+}
+.hero-block .result-container .span3,
+.hero-block .result-container .span1
+{
+   margin: 0 auto;
+   float: none;
+   display: inline-block;
+}
+.hero-block .btn.reset{
+    margin-top:60px;
+}
+.hero-block .symbol{
+    color:#fff;
 }
 
 

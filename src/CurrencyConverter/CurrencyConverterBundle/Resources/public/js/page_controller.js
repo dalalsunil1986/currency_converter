@@ -136,20 +136,19 @@ ConverterApp.directive('amountConvert', function() {
 function page_controller($scope, $http){
     
     var currencies_url = '../web/api/load'; //api for retrieving currencies
-    
+    var service_url = 'https://currencyconverter.p.mashape.com/?';
     $scope.amount = null;
     $scope.currency_code_input = null; //currency code to convert
     $scope.currency_code_output = null; //currency code to output
     $scope.currencies = [];
     $scope.resultMessage = [];
+    $scope.showResult = false;
+    $scope.resultAmount = null;
     
     
     //called on page load
     $scope.init = function() {
-<<<<<<< HEAD
-=======
-        console.log('Initializing.......');
->>>>>>> 8e8e5d92fad6924dc5f9ced68bfdd4639ba20b8d
+
         retrieveCurrencies();	
     };
     
@@ -158,13 +157,37 @@ function page_controller($scope, $http){
         if(undefined !== symbol){               
             var url = 'http://s.xe.com/v2/themes/xe/images/flags/big/'+symbol.toLowerCase()+'.png';
             return url;
-        }
+        }	
     };
     
     //submits and create a request
     $scope.convert = function(){
-       console.log('Submitting.....'); 
+       var input_code = $scope.currency_code_input.currency_code;
+       var output_code = $scope.currency_code_output.currency_code;
+      
+	$http({
+	        method: 'GET',
+		url: service_url+'from_amount='+$scope.amount+'&from='+input_code+'&to='+output_code,
+		headers: {'X-Mashape-Authorization': 'cH514KK6Q30x7p7iG742raGSwU34DwIe'
+	      }
+	}).success(function(data, status, headers, config) {
+	   console.log(data);
+	   $scope.resultAmount = data.to_amount;
+	   $scope.showResult = true;
+	}).
+	error(function(data, status, headers, config) {
+	
+	});
     };
+    
+    $scope.reset = function(){
+	$scope.showResult = false;
+	$scope.amount = null;
+	$scope.currency_code_input = null; //currency code to convert
+	$scope.currency_code_output = null; //currency code to output	
+	$scope.resultMessage = [];
+	$scope.resultAmount = null;
+    }
     
     
     
