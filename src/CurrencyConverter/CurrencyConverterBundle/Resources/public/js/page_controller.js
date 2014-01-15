@@ -146,10 +146,7 @@ function page_controller($scope, $http){
     
     //called on page load
     $scope.init = function() {
-<<<<<<< HEAD
-=======
-        console.log('Initializing.......');
->>>>>>> 8e8e5d92fad6924dc5f9ced68bfdd4639ba20b8d
+
         retrieveCurrencies();	
     };
     
