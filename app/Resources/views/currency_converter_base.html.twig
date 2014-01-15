@@ -12,6 +12,7 @@
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js" type="text/javascript"></script>           
         <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js" type="text/javascript"></script>
         <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.6/angular.min.js"></script>
+        <script type="text/javascript" src="{{ asset('js/jquery.blockUI.js') }}"></script>
         <script type="text/javascript" src="{{ asset('js/init.js') }}"></script>
     {% block stylesheets %}   
         <link href='//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css' rel='stylesheet' type='text/css'>                
@@ -27,7 +28,7 @@
 
   <body data-ng-app="CurrencyConverterApp">
 
-
+     
 	<div class="nav">
 		<a href="index.html#hero" class="scroll">section one</a>
 		<a href="index.html#work" class="scroll">section two</a>
@@ -50,7 +51,7 @@
 		{% block section_networks %}
                 {% endblock %}
 	</section>
-
+     
 
     <!-- Bootstrap core JavaScript
     ================================================== -->

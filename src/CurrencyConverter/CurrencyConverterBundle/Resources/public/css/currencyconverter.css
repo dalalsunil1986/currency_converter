@@ -39,7 +39,7 @@ h1{
 .error-holder.row-fluid .alert
 {
 
-    padding:0;
+    padding:3px;
 
 }
 
@@ -135,7 +135,7 @@ h1{
 }
 .hero-block .result-container{
     color:#000;
-    font-size: 46px;  
+    font-size: 34px;  
 }
 .hero-block a.reset{
     font-size:14px;
@@ -154,7 +154,3 @@ h1{
 .hero-block .symbol{
     color:#fff;
 }
-
-
-
-

@@ -6,7 +6,7 @@
        
        <img src="{{ asset('bundles/currencyconvertercurrencyconverter/img/go.png') }}" class="mb-7 hero-image">
        
-       <form ng-show="showResult == false" name = "currency_converter_form" ng-submit="convert()">
+       <form ng-show="showResult == false" name = "currency_converter_form" ng-submit="convert()" novalidate>
         
          <div class="row-fluid">
 
@@ -32,7 +32,7 @@
                  <div class="input-group">
                      <input type="text" class="form-control" ng-model="amount" placeholder="Enter amount to convert....." name="amount_to_convert" amount-convert required>
                      <span class="input-group-btn">
-                        <button class="btn btn-danger" type="submit" >Convert</button>
+                        <button class="btn btn-danger" type="submit" ng-disabled="buttonDisabled">Convert</button>
                      </span>
                  </div>
              </div>
@@ -94,7 +94,8 @@
         <!--the indicator for ajax process-->
         <div id="loading-indicator"></div>
         <!--the indicator for ajax process-->
-         
+        
+      
     </div>
     <a href="index.html#work" class="scroll"><span class="down-arrow"></span></a>
 

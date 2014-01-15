@@ -6,32 +6,6 @@
  * Version: 1.0
  *
  */
-
-ConverterApp.config(['$httpProvider', function($httpProvider) {
-    var interceptor = ['$q', 'LoadingIndicatorHandler', function($q, LoadingIndicatorHandler) {
-        return function(promise) {
-            LoadingIndicatorHandler.enable();
-            
-            return promise.then(
-                function( response ) {
-                    LoadingIndicatorHandler.disable();
-                    
-                    return response;
-                },
-                function( response ) {
-                    LoadingIndicatorHandler.disable();
-                    
-                    // Reject the reponse so that angular isn't waiting for a response.
-                    return $q.reject( response );
-                }
-            );
-        };
-    }];
-    
-    $httpProvider.responseInterceptors.push(interceptor);
-    
-}]);
-
 ConverterApp.directive('chosen',function(){
    var linker = function(scope,element,attrs){
        var list = attrs['chosen'];
@@ -52,46 +26,10 @@ ConverterApp.directive('chosen',function(){
    return{
      restrict:'A',
      link: linker
-   }
+   };
 });
  
 
-ConverterApp.factory('LoadingIndicatorHandler', function()
-{
-   
-    var $element = $('#loading-indicator');
-    
-    return {
-        // Counters to keep track of how many requests are sent and to know
-        // when to hide the loading element.
-        enable_count: 0,
-        disable_count: 0,
-        
-        /**
-         * Fade the blocker in to block the screen.
-         *
-         * @return {void}
-         */
-        enable: function() {
-            this.enable_count++;
-            
-            if ( $element.length ) $element.show();
-        },
-        
-        /**
-         * Fade the blocker out to unblock the screen.
-         *
-         * @return {void}
-         */
-        disable: function() {
-            this.disable_count++;
-            
-            if ( this.enable_count == this.disable_count ) {
-                if ( $element.length ) $element.hide();
-            }
-        }
-    }
-});
 
 ConverterApp.factory('pageFactory', function($http) {
     return {        
@@ -148,7 +86,6 @@ function page_controller($scope, $http){
     
     //called on page load
     $scope.init = function() {
-
         retrieveCurrencies();	
     };
     
@@ -162,32 +99,54 @@ function page_controller($scope, $http){
     
     //submits and create a request
     $scope.convert = function(){
-       var input_code = $scope.currency_code_input.currency_code;
-       var output_code = $scope.currency_code_output.currency_code;
+        
+       if($scope.currency_code_input === null)
+         return false;
+       
+       if($scope.currency_code_output === null)
+          return false;
       
-	$http({
-	        method: 'GET',
-		url: service_url+'from_amount='+$scope.amount+'&from='+input_code+'&to='+output_code,
-		headers: {'X-Mashape-Authorization': 'cH514KK6Q30x7p7iG742raGSwU34DwIe'
-	      }
-	}).success(function(data, status, headers, config) {
-	   console.log(data);
-	   $scope.resultAmount = data.to_amount;
-	   $scope.showResult = true;
-	}).
-	error(function(data, status, headers, config) {
-	
+       if($scope.amount === null)
+          return false;       
+       
+        var input_code = $scope.currency_code_input.currency_code;
+        var output_code = $scope.currency_code_output.currency_code;
+        var config = { headers:  {
+              'X-Mashape-Authorization': 'cH514KK6Q30x7p7iG742raGSwU34DwIe'
+            }
+        };
+        
+        $.blockUI({ css: { 
+            border: 'none', 
+            padding: '15px', 
+            backgroundColor: '#000', 
+            '-webkit-border-radius': '10px', 
+            '-moz-border-radius': '10px', 
+            opacity: .5, 
+            color: '#fff' 
+        } });  
+       
+        var url = service_url+'from_amount='+$scope.amount+'&from='+input_code+'&to='+output_code;
+        $http.get(url, config).success(function(data) {
+           var output = data.to_amount;
+           $scope.resultAmount = output.toFixed(2);
+           $scope.showResult = true;
+           $.unblockUI();
+	}).error(function(data) {
+	    handleResponse('error','An error occurred while serving the request.'); 
+            $.unblockUI();
 	});
+        
     };
     
     $scope.reset = function(){
 	$scope.showResult = false;
 	$scope.amount = null;
-	$scope.currency_code_input = null; //currency code to convert
-	$scope.currency_code_output = null; //currency code to output	
+	//$scope.currency_code_input = null; //currency code to convert
+	//$scope.currency_code_output = null; //currency code to output	
 	$scope.resultMessage = [];
 	$scope.resultAmount = null;
-    }
+    };
     
     
     
