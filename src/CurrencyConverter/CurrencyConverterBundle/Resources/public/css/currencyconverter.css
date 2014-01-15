@@ -38,9 +38,7 @@ h1{
 
 .error-holder.row-fluid .alert
 {
-
-    padding:3px;
-
+ padding:3px;
 }
 
 .error-holder.row-fluid .span3
@@ -131,6 +129,35 @@ h1{
 
 .hero-block .chosen-container a{
     font-size:14px;
+<<<<<<< HEAD
+=======
+
+}
+.hero-block .result-container{
+    color:#000;
+    font-size: 46px;  
+}
+.hero-block a.reset{
+    font-size:14px;
+    color:red;
+}
+.hero-block .result-container .span3,
+.hero-block .result-container .span1
+{
+   margin: 0 auto;
+   float: none;
+   display: inline-block;
+}
+.hero-block .btn.reset{
+    margin-top:60px;
+}
+.hero-block .symbol{
+    color:#fff;
+}
+
+
+
+>>>>>>> 4f4d685eb2c7f1f0b3c15e9cdccd8cf164cb9bf5
 
 }
 .hero-block .result-container{

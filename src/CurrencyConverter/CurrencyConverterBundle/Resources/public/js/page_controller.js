@@ -99,7 +99,7 @@ function page_controller($scope, $http){
     
     //submits and create a request
     $scope.convert = function(){
-        
+
        if($scope.currency_code_input === null)
          return false;
        
@@ -147,6 +147,15 @@ function page_controller($scope, $http){
 	$scope.resultMessage = [];
 	$scope.resultAmount = null;
     };
+    
+    $scope.reset = function(){
+	$scope.showResult = false;
+	$scope.amount = null;
+	$scope.currency_code_input = null; //currency code to convert
+	$scope.currency_code_output = null; //currency code to output	
+	$scope.resultMessage = [];
+	$scope.resultAmount = null;
+    }
     
     
     
