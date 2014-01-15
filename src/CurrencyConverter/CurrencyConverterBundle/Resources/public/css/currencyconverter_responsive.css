@@ -6,6 +6,22 @@
  * Version: 1.0
  *
  */
+@media (max-width: 960px){
+  .textbox-holder.row-fluid .col-lg-3
+   {
+     width: 260px;
+   }
+
+   .hero-block .span4.right{
+       margin-top:20px;
+   }
+   
+   .hero-block .result-container{
+    font-size: 36px;
+   }
+
+}
+
 @media (max-width: 720px){
   .textbox-holder.row-fluid .col-lg-3
    {
@@ -14,6 +30,10 @@
 
    .hero-block .span4.right{
        margin-top:20px;
+   }
+   
+   .hero-block .result-container{
+    font-size: 32px;
    }
 
 }
@@ -26,5 +46,8 @@
     }
   .hero-block .span4.right{
        margin-top:20px;
+   }
+   .hero-block .result-container{
+    font-size: 24px;
    }
 }
