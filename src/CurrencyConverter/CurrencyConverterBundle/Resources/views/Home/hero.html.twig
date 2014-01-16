@@ -4,7 +4,7 @@
     </div>
    <div class="hero-block" ng-controller="page_controller" ng-init="init()">
        
-       <img src="{{ asset('bundles/currencyconvertercurrencyconverter/img/go.png') }}" class="mb-7 hero-image">
+       <img ng-show="showResult == false" src="{{ asset('bundles/currencyconvertercurrencyconverter/img/go.png') }}" class="mb-7 hero-image">
        
 
        <form ng-show="showResult == false" name = "currency_converter_form" ng-submit="convert()" novalidate>
@@ -42,7 +42,6 @@
           
 	   <!--error holder for forms-->
 	   <div class="error-holder row-fluid">
-
                 <div class="span3"  ng-show="currency_converter_form.$dirty">  
                     <div class="alert alert-danger error" ng-show="currency_converter_form.amount_to_convert.$invalid && !currency_converter_form.currency_code_input.$error.required && !currency_converter_form.currency_code_to.$error.required">
                             Please enter a valid amount.
@@ -53,9 +52,8 @@
                      <div class="alert alert-danger error" ng-show="currency_converter_form.currency_code_to.$error.required && !currency_converter_form.currency_code_input.$error.required">
                             Please select output currency.
                     </div>
-                </div> 
-
-          </div>
+                </div>
+	   </div>
           <!--error holder for forms-->
 	  
        </form>
@@ -73,7 +71,7 @@
 		<span class="code">({%raw%}{{currency_code_output.currency_code}}{%endraw%})</span>
 	   </div> 
        </div>
-       <button class="btn btn-danger reset" type="button" ng-show="showResult" ng-click="reset()">Clear</button>
+       <button class="btn btn-danger reset" type="button" ng-show="showResult" ng-click="reset()">Back</button>
        
        
         <!--error holder for ajax request-->
@@ -92,11 +90,6 @@
                </div>
         </div>
        <!--error holder for ajax request-->
-       
-        <!--the indicator for ajax process-->
-        <div id="loading-indicator"></div>
-        <!--the indicator for ajax process-->
-        
       
     </div>
     <a href="index.html#work" class="scroll"><span class="down-arrow"></span></a>
