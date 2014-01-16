@@ -8,16 +8,15 @@
  */
 ConverterApp.directive('chosen',function(){
    var linker = function(scope,element,attrs){
+       
        var list = attrs['chosen'];
-       element.trigger('chosen:updated');
+    
        scope.$watch(list,function(){
 	   element.trigger('chosen:updated');
        });
        
-       scope.$watch(attrs['ngModel'], function() {
-
-          element.trigger('chosen:updated');
-
+       scope.$watch(attrs['ngModel'], function() {          
+           element.trigger('chosen:updated');
        });
 
        element.chosen();
@@ -27,6 +26,17 @@ ConverterApp.directive('chosen',function(){
      restrict:'A',
      link: linker
    };
+});
+
+
+ConverterApp.directive('ngEnter', function () {
+    return function (scope, element, attrs) {
+        element.bind("keydown keyup keypress", function (event) {          
+            scope.$apply(function (){                
+                scope.$eval(attrs.ngEnter);
+            });
+        });
+    };
 });
  
 
@@ -56,12 +66,25 @@ ConverterApp.directive('amountConvert', function() {
       function fromUser(text) {
         if(!text)
             return false;
-        var transformedInput = text.replace(/[^0-9.]/g, '');
-       
-        if(transformedInput !== text) {
+        
+        var transformedInput = text.replace(/[^0-9.]/g, '');//replace blank all non-numeric
+        
+        var count = 0;
+        if(transformedInput){
+            if(Math.floor(transformedInput) != transformedInput)
+                 count = transformedInput.toString().split(".").length;
+            
+        }
+        
+        if(count > 2){
+            transformedInput = transformedInput.substring(0,transformedInput.lastIndexOf('.'));
+        }
+        
+        if(transformedInput !== text) {           
             ngModelCtrl.$setViewValue(transformedInput);
             ngModelCtrl.$render();
         }
+        
         return transformedInput;  // or return Number(transformedInput)
       }
       ngModelCtrl.$parsers.push(fromUser);
@@ -75,7 +98,7 @@ function page_controller($scope, $http){
     
     var currencies_url = '../web/api/load'; //api for retrieving currencies
     var service_url = 'https://currencyconverter.p.mashape.com/?';
-    var open_rate_url = 'http://openexchangerates.org/api/latest.json?app_id=';
+   
     $scope.amount = null;
     $scope.currency_code_input = null; //currency code to convert
     $scope.currency_code_output = null; //currency code to output
@@ -90,107 +113,81 @@ function page_controller($scope, $http){
         retrieveCurrencies();	
     };
     
+    $scope.$watchCollection('currency_code_input', function() {
+        convert();
+    });
+    
+    $scope.$watchCollection('currency_code_output', function() {
+        convert();
+    });
+    
     //gets the url for the flag icon
     $scope.getFlag = function(symbol){
+        
         if(undefined !== symbol){               
             var url = 'http://s.xe.com/v2/themes/xe/images/flags/big/'+symbol.toLowerCase()+'.png';
             return url;
-        }	
+        }
+       
+    };
+    
+    $scope.convertNow = function(){
+        convert();
     };
     
     //submits and create a request
-    $scope.convert = function(){
+    var convert = function(){
 	
 	if($scope.currency_code_input === null)
-	  return false;
+        {
+          $scope.showResult = false;
+          handleResponse('error','Please select an input currency.');
+          return false;
+        }
+	  
 	
 	if($scope.currency_code_output === null)
-	   return false;
+	{
+          $scope.showResult = false;
+          handleResponse('error','Please select an output currency.');
+          return false;
+        }
        
-	if($scope.amount == null || $scope.amount == 0 || !$scope.amount || $scope.amount == '')
-	   return false;
-	
+	if($scope.amount == null || !$scope.amount || $scope.amount == '' || $scope.amount == 0)
+        {
+          $scope.showResult = false;
+	  handleResponse('error','Please enter a valid amount.');
+          return false;
+        }
+        
         var input_code = $scope.currency_code_input.currency_code;
         var output_code = $scope.currency_code_output.currency_code;
 	
-	if (input_code === output_code){
+	if (input_code === output_code)
+        {
+           $scope.showResult = false;
 	   handleResponse('error','Currencies to convert shouldn\'t be the same.');
 	   return false;
 	}
 	
-        $.blockUI({ css: { 
-            border: 'none', 
-            padding: '10px', 
-            backgroundColor: '#000', 
-            '-webkit-border-radius': '10px', 
-            '-moz-border-radius': '10px', 
-            opacity: .5, 
-            color: '#fff' 
-        } });  
+        //get the rates
+        var input_rate = $scope.currency_code_input.rate;
+        var output_rate = $scope.currency_code_output.rate;
+
+        if (!input_rate || !output_rate || 0 === input_rate || 0 === output_rate) 
+        {
+          $scope.showResult = false;
+          handleResponse('error','Sorry, no available data for conversion.');
+          return false;
+        }
        
-      
-	var url = open_rate_url + 'fake_it';
-        
-	$http.get(url).success(function(data) {
-           
-	   if (data.error) {
-	     handleResponse('error',error.description);
-	     return false;
-	   }
-	   
-	   if (!data.rates || data.rates == null) {
-	     handleResponse('error','Sorry, no available data for conversion.');
-	     return false;
-	   }
-	   
-	   var rates = data.rates;
-	   var input_rate = rates[input_code];
-	   var output_rate = rates[output_code];
-	   
-	   if (!input_rate || !output_rate) {
-	      handleResponse('error','Sorry, no available data for conversion.');
-	     return false;
-	   }
-	   
-	   var output = processConversion($scope.amount,output_rate,input_rate);
-	  
-           $scope.resultAmount = output.toFixed(2);
-           $scope.showResult = true; //display result
-	   $scope.resultMessage = [];
-           $.unblockUI();
-	   
-	}).error(function(data) {
-	    handleResponse('error','Sorry, server error occurred while connecting.'); 
-            $.unblockUI();
-	});
-        
+        var output = processConversion($scope.amount,output_rate,input_rate);
+        $scope.resultAmount = output.toFixed(2);       
+        $scope.showResult = true; //display result
+        $scope.resultMessage = [];
+       
     };
     
-    //backup conversion
-    $scope.conversionBackup = function(input_code, output_code){
-	
-	var url = service_url+'from_amount='+$scope.amount+'&from='+input_code+'&to='+output_code;	
-	var config = { headers:  {
-              'X-Mashape-Authorization': 'fake_it'
-            }
-        };	
-	$http.get(url,config).success(function(data) {
-           var output = data.to_amount;	   
-	   if (output <= 0) { //if output is 0 then just throw an error
-	      $.unblockUI();
-	      handleResponse('error','Sorry, no available data for conversion.');
-	      return false;
-	   }
-	   $scope.resultAmount = output.toFixed(2);
-           $scope.showResult = true; //display result
-	   $scope.resultMessage = [];
-           $.unblockUI();
-	   
-	}).error(function(data) {
-	    handleResponse('error','Sorry, server error occurred while connecting.'); 
-            $.unblockUI();
-	});        
-    };
     
     /**
      * Do the conversion using the given rates from the base currency
@@ -221,18 +218,14 @@ function page_controller($scope, $http){
             }
             else
                //show the result container
-               handleResponse('error',data.error.message);          
-            
-           
-        }).error(function() {            
-           handleResponse('error','Something\'s wrong happened.');
-        });         
+               handleResponse('error',data.error.message);      
+         }).error(function() {            
+               handleResponse('error','Something\'s wrong happened.');
+         });         
     };
     
     
-    
-    
-    var handleResponse = function(type,message){
+   var handleResponse = function(type,message){
          var response = new Array();
          response.type = type;
          var response_body = {responseMsg:message};

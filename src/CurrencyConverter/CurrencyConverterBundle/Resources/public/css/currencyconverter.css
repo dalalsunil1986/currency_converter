@@ -170,3 +170,11 @@ h1{
 .hero-block .symbol{
     color:#fff;
 }
+.built-by,
+.built-by a{
+    font-size:14px;
+    font-weight:normal;
+    color:#000;
+    padding:6px;
+}
+

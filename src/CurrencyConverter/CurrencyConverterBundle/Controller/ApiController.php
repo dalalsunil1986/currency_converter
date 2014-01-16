@@ -34,12 +34,14 @@ class ApiController extends ApiBaseController
                 $currency = $country->getCurrency()->getCurrency();
                 $country_name = $country->getCountry();
                 $currency_code = $country->getCurrency()->getCode();
+                $rate = $country->getCurrency()->getRate();
                 
                 $data['currency_id'] = $country->getCurrency()->getId();            
                 $data['currency_code'] = $currency_code;
                 $data['currency_symbol'] = $symbol;
                 $data['currency'] = $currency;
                 $data['country'] = $country_name;
+                $data['rate'] = $rate;
                 
                 if(!$currency_code || $currency_code == null){
                     $currency_code = '';
@@ -48,11 +50,9 @@ class ApiController extends ApiBaseController
                     $currency_code = '('.$currency_code.')';
                 }
                 
-                $data['currency_info'] = $currency_code.' '.$currency.' '.$country_name;
-                
-                
-                
+                $data['currency_info'] = $currency_code.' '.$currency.' '.$country_name;              
                 $result[]= $data;
+                
             }
             
             $response = $this->getSuccessResponse('200 OK',$result);            
