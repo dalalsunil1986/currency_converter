@@ -7,9 +7,9 @@
  *
  */
 @media (max-width: 960px){
-  .textbox-holder.row-fluid .col-lg-3
+  .textbox-holder.row-fluid input
    {
-     width: 260px;
+     width: 300px;
    }
 
    .hero-block .span4.right{
@@ -19,15 +19,19 @@
    .hero-block .result-container{
     font-size: 36px;
    }
+   
+   .text .span4{
+       width:300px;
+   }
 
 }
 
 @media (max-width: 720px){
-  .textbox-holder.row-fluid .col-lg-3
+  .textbox-holder.row-fluid input
    {
-     width: 260px;
+     width: 300px;
    }
-
+   
    .hero-block .span4.right{
        margin-top:20px;
    }
@@ -35,19 +39,26 @@
    .hero-block .result-container{
     font-size: 32px;
    }
+   
+    .text .span4{
+       width:300px;
+   }
 
 }
 
 
 @media (max-width: 480px){
-  .textbox-holder.row-fluid .col-lg-3
-    {
-        width: 250px;
-    }
+ .textbox-holder.row-fluid input
+   {
+     width: 300px;
+   }
   .hero-block .span4.right{
        margin-top:20px;
    }
    .hero-block .result-container{
     font-size: 24px;
+   }
+    .text .span4{
+       width:300px;
    }
 }

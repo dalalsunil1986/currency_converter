@@ -121,10 +121,10 @@ h1{
 .hero-block .chosen-container a{
     font-size:14px;
 }
-
 .hero-block .result-container{
     color:#000;
-    font-size: 46px;  
+    font-size: 46px;
+    margin-bottom:20px;
 }
 .hero-block a.reset{
     font-size:14px;
@@ -168,7 +168,7 @@ h1{
     margin-top:60px;
 }
 .hero-block .symbol{
-    color:#fff;
+    color:#ff0000;
 }
 .built-by,
 .built-by a{
