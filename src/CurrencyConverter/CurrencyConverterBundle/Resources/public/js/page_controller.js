@@ -129,7 +129,7 @@ function page_controller($scope, $http){
         } });  
        
       
-	var url = open_rate_url + 'ceb83508b0b4476aa02983f3b4deaa40';
+	var url = open_rate_url + 'fake_it';
         
 	$http.get(url).success(function(data) {
            
@@ -171,7 +171,7 @@ function page_controller($scope, $http){
 	
 	var url = service_url+'from_amount='+$scope.amount+'&from='+input_code+'&to='+output_code;	
 	var config = { headers:  {
-              'X-Mashape-Authorization': 'cH514KK6Q30x7p7iG742raGSwU34DwIe'
+              'X-Mashape-Authorization': 'fake_it'
             }
         };	
 	$http.get(url,config).success(function(data) {
