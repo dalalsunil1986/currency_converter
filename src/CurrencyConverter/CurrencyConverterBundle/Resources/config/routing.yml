@@ -13,3 +13,9 @@ currency_converter_currency_converter_api_load:
     defaults: { _controller: CurrencyConverterCurrencyConverterBundle:Api:load }
     requirements:
         _method:  GET
+        
+currency_converter_currency_converter_api_rates:
+    pattern:  /api/rates
+    defaults: { _controller: CurrencyConverterCurrencyConverterBundle:Api:conversionRates }
+    requirements:
+        _method:  GET

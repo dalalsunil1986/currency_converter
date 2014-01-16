@@ -38,14 +38,13 @@ h1{
 
 .error-holder.row-fluid .alert
 {
- padding:3px;
+    padding:4px;
+    font-size:16px;
 }
 
 .error-holder.row-fluid .span3
 {
-
-    margin-top:40px;
-
+   margin-top:40px;
 }
 
 .form-control,
@@ -88,14 +87,6 @@ h1{
 .hero-block img.mb-7{
     margin-bottom: 0;
 }
-
-#loading-indicator{
-    background: url(../img/loader.gif) no-repeat right top;
-    height: 15px;
-    width: 20px;
-    margin: 20px 5px 0 0;
-    float: right;    
-}
 .error{
     color:#FF0000;
 }
@@ -129,10 +120,8 @@ h1{
 
 .hero-block .chosen-container a{
     font-size:14px;
-<<<<<<< HEAD
-=======
-
 }
+
 .hero-block .result-container{
     color:#000;
     font-size: 46px;  
@@ -156,9 +145,6 @@ h1{
 }
 
 
-
->>>>>>> 4f4d685eb2c7f1f0b3c15e9cdccd8cf164cb9bf5
-
 }
 .hero-block .result-container{
     color:#000;
@@ -167,6 +153,9 @@ h1{
 .hero-block a.reset{
     font-size:14px;
     color:red;
+}
+.hero-block .result-container .span3{
+    width:auto;
 }
 .hero-block .result-container .span3,
 .hero-block .result-container .span1

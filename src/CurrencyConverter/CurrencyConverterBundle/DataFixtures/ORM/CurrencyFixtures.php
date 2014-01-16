@@ -5,6 +5,8 @@ namespace CurrencyConverter\CurrencyConverterBundle\DataFixtures\ORM;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use CurrencyConverter\CurrencyConverterBundle\Entity\Currency;
+use Symfony\Component\DependencyInjection\ContainerAwareInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use CurrencyConverter\CurrencyConverterBundle\Entity\Country;
 
 /**
@@ -13,11 +15,27 @@ use CurrencyConverter\CurrencyConverterBundle\Entity\Country;
  * 
  */
 
-class CurrencyFixtures implements FixtureInterface
+class CurrencyFixtures implements FixtureInterface, ContainerAwareInterface
 {
+    
+    /**
+     * @var ContainerInterface
+     */
+    private $container;
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setContainer(ContainerInterface $container = null)
+    {
+        $this->container = $container;
+    }
+    
     public function load(ObjectManager $manager)
     {
        
+        $rates = $this->callRates(); //grab all the rates
+        
         $var = __DIR__.'/simple_html_dom.php';
         include_once($var);
         $html = file_get_html('http://www.xe.com/iso4217.php');
@@ -130,9 +148,18 @@ class CurrencyFixtures implements FixtureInterface
             
            
             $currency = new Currency();
-	    $currency_name = trim(preg_replace('/ +/', ' ', preg_replace('/[^A-Za-z0-9 ]/', ' ', urldecode(html_entity_decode(strip_tags($item['currency']))))));
+	   
+            $currency_name = trim($this->cleanString($item['currency']));
+            $currency_code = trim($this->cleanString($item['code']));
+            $currency_rate = 0;
+            if(isset($rates[$currency_code])){
+               $currency_rate = $rates[$currency_code];
+            }
+            
             $currency->setCurrency($currency_name);
-            $currency->setCode($item['code']);
+            $currency->setCode($currency_code);
+            $currency->setRate($currency_rate);
+            
             if(isset($final_symbol)){
               if(strlen($final_symbol) > 0){
                   $currency->setSymbol($final_symbol);
@@ -144,9 +171,10 @@ class CurrencyFixtures implements FixtureInterface
             
             $country = new Country();            
             $country->setCurrencyId($currency->getId());
-            $country->setCurrency($currency);            
-            $country_name = trim(preg_replace('/ +/', ' ', preg_replace('/[^A-Za-z0-9 ]/', ' ', urldecode(html_entity_decode(strip_tags($item['country']))))));
+            $country->setCurrency($currency);           
+            $country_name = trim($this->cleanString($item['country']));
 	    $country->setCountry($country_name);
+           
             $manager->persist($country);
             $manager->flush();
             
@@ -154,6 +182,36 @@ class CurrencyFixtures implements FixtureInterface
         
         
        
+    }
+    
+    /**
+     * Call the rate for each currency
+     *
+     * @return array $rate_container
+     **/
+    public function callRates(){
+        
+        $file = 'latest.json';
+        $appId = $this->container->getParameter('conversion_api_key');
+        
+        header('Content-Type: application/json');
+        $json = file_get_contents("http://openexchangerates.org/api/{$file}?app_id={$appId}");
+      
+        $obj = json_decode($json);
+        $rate_container = array();
+        
+        if(isset($obj->{'rates'})){
+            foreach($obj->{'rates'} as $key=>$rate){
+                $rate_container[$key]=$rate;
+            }
+        }
+        
+        return $rate_container;
+    }
+    
+    
+    private function cleanString($string){
+        return preg_replace('/ +/', ' ', preg_replace('/[^A-Za-z0-9 ]/', ' ', urldecode(html_entity_decode(strip_tags($string)))));
     }
     
     

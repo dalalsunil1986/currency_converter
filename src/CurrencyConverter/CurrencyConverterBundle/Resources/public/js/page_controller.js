@@ -75,6 +75,7 @@ function page_controller($scope, $http){
     
     var currencies_url = '../web/api/load'; //api for retrieving currencies
     var service_url = 'https://currencyconverter.p.mashape.com/?';
+    var open_rate_url = 'http://openexchangerates.org/api/latest.json?app_id=';
     $scope.amount = null;
     $scope.currency_code_input = null; //currency code to convert
     $scope.currency_code_output = null; //currency code to output
@@ -99,26 +100,27 @@ function page_controller($scope, $http){
     
     //submits and create a request
     $scope.convert = function(){
-
-       if($scope.currency_code_input === null)
-         return false;
+	
+	if($scope.currency_code_input === null)
+	  return false;
+	
+	if($scope.currency_code_output === null)
+	   return false;
        
-       if($scope.currency_code_output === null)
-          return false;
-      
-       if($scope.amount === null)
-          return false;       
-       
+	if($scope.amount == null || $scope.amount == 0 || !$scope.amount || $scope.amount == '')
+	   return false;
+	
         var input_code = $scope.currency_code_input.currency_code;
         var output_code = $scope.currency_code_output.currency_code;
-        var config = { headers:  {
-              'X-Mashape-Authorization': 'cH514KK6Q30x7p7iG742raGSwU34DwIe'
-            }
-        };
-        
+	
+	if (input_code === output_code){
+	   handleResponse('error','Currencies to convert shouldn\'t be the same.');
+	   return false;
+	}
+	
         $.blockUI({ css: { 
             border: 'none', 
-            padding: '15px', 
+            padding: '10px', 
             backgroundColor: '#000', 
             '-webkit-border-radius': '10px', 
             '-moz-border-radius': '10px', 
@@ -126,38 +128,86 @@ function page_controller($scope, $http){
             color: '#fff' 
         } });  
        
-        var url = service_url+'from_amount='+$scope.amount+'&from='+input_code+'&to='+output_code;
-        $http.get(url, config).success(function(data) {
-           var output = data.to_amount;
+      
+	var url = open_rate_url + 'fake_it';
+        
+	$http.get(url).success(function(data) {
+           
+	   if (data.error) {
+	     handleResponse('error',error.description);
+	     return false;
+	   }
+	   
+	   if (!data.rates || data.rates == null) {
+	     handleResponse('error','Sorry, no available data for conversion.');
+	     return false;
+	   }
+	   
+	   var rates = data.rates;
+	   var input_rate = rates[input_code];
+	   var output_rate = rates[output_code];
+	   
+	   if (!input_rate || !output_rate) {
+	      handleResponse('error','Sorry, no available data for conversion.');
+	     return false;
+	   }
+	   
+	   var output = processConversion($scope.amount,output_rate,input_rate);
+	  
            $scope.resultAmount = output.toFixed(2);
-           $scope.showResult = true;
+           $scope.showResult = true; //display result
+	   $scope.resultMessage = [];
            $.unblockUI();
+	   
 	}).error(function(data) {
-	    handleResponse('error','An error occurred while serving the request.'); 
+	    handleResponse('error','Sorry, server error occurred while connecting.'); 
             $.unblockUI();
 	});
         
     };
     
-    $scope.reset = function(){
-	$scope.showResult = false;
-	$scope.amount = null;
-	//$scope.currency_code_input = null; //currency code to convert
-	//$scope.currency_code_output = null; //currency code to output	
-	$scope.resultMessage = [];
-	$scope.resultAmount = null;
+    //backup conversion
+    $scope.conversionBackup = function(input_code, output_code){
+	
+	var url = service_url+'from_amount='+$scope.amount+'&from='+input_code+'&to='+output_code;	
+	var config = { headers:  {
+              'X-Mashape-Authorization': 'fake_it'
+            }
+        };	
+	$http.get(url,config).success(function(data) {
+           var output = data.to_amount;	   
+	   if (output <= 0) { //if output is 0 then just throw an error
+	      $.unblockUI();
+	      handleResponse('error','Sorry, no available data for conversion.');
+	      return false;
+	   }
+	   $scope.resultAmount = output.toFixed(2);
+           $scope.showResult = true; //display result
+	   $scope.resultMessage = [];
+           $.unblockUI();
+	   
+	}).error(function(data) {
+	    handleResponse('error','Sorry, server error occurred while connecting.'); 
+            $.unblockUI();
+	});        
     };
     
+    /**
+     * Do the conversion using the given rates from the base currency
+     *
+     * @param float input_value the value to convert
+     * @param float output_rate the base rate for the output currency
+     * @param float input_rate the base rate for the input currency
+     */
+    var processConversion = function(input_value, output_rate, input_rate){
+	  return (input_value*(output_rate/input_rate));
+     };
+    
     $scope.reset = function(){
-	$scope.showResult = false;
-	$scope.amount = null;
-	$scope.currency_code_input = null; //currency code to convert
-	$scope.currency_code_output = null; //currency code to output	
+	$scope.showResult = false;	
 	$scope.resultMessage = [];
 	$scope.resultAmount = null;
-    }
-    
-    
+    };     
     
     /**
      * This do an ajax call and fill-up the dropdown list with currencies.
