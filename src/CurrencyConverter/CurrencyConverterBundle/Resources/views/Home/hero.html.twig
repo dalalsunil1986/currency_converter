@@ -29,14 +29,14 @@
                  <div ng-show="currency_code_input.currency_code != undefined && currency_code_input.currency_code != ''" class="flag-holder">
                      <img width="50" height="30" src="{%raw%}{{ getFlag(currency_code_input.currency_code) }}{%endraw%}" />
                  </div>
-                 <select ng-click="convertNow()" data-placeholder="Select input currency:" tabindex="2" ng-model="currency_code_input" ng-options="item.currency_info for item in currencies" name="currency_code_input" class="convert-from chosen-select" chosen="currencies" required>
+                 <select data-placeholder="Select input currency:" tabindex="2" ng-model="currency_code_input" ng-options="item.currency_info for item in currencies" name="currency_code_input" class="convert-from chosen-select" chosen="currencies" required>
                  </select>
              </div>
              <div class="span4 right">
                  <div ng-show="currency_code_output.currency_code != undefined && currency_code_output.currency_code != ''" class="flag-holder">
                      <img  src="{%raw%}{{ getFlag(currency_code_output.currency_code) }}{%endraw%}" width="50" height="30" />
                  </div>
-                 <select ng-click="convertNow()" data-placeholder="Select output currency:" tabindex="2" ng-options="item.currency_info for item in currencies" ng-model="currency_code_output" name="currency_code_to" class="convert-to chosen-select" chosen="currencies" required>
+                 <select data-placeholder="Select output currency:" tabindex="2" ng-options="item.currency_info for item in currencies" ng-model="currency_code_output" name="currency_code_to" class="convert-to chosen-select" chosen="currencies" required>
                  </select>
              </div>
 
@@ -68,7 +68,14 @@
         </div>
        <!--error holder for ajax request-->
       <br />
-      <span class="built-by">Powered by: <a href="index.html#work" class="scroll">Symfony PHP, Bootstrap & AngularJs</a></span> 
+      <span class="built-by">Powered by: 
+	  <a href="http://symfony.com/legacy">Symfony</a>, 
+	  <a href="http://getbootstrap.com/">Bootstrap</a>, 
+	  <a href="http://angularjs.org/">AngularJs</a>
+	  & <a href="https://openexchangerates.org/">Open Exchange Rates</a>
+      </span>
+      <br /> 
+      <span class="built-by">Created by: <a href="index.html#networks" class="scroll">Joel Capillo</a></span> 
     </div>
-    <a href="index.html#work" class="scroll"><span class="down-arrow"></span></a>
+    <a href="index.html#networks" class="scroll"><span class="down-arrow"></span></a>
 

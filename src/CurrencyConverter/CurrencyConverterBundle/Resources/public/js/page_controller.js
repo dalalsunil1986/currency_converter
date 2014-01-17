@@ -99,9 +99,9 @@ function page_controller($scope, $http){
     var currencies_url = '../web/api/load'; //api for retrieving currencies
     var service_url = 'https://currencyconverter.p.mashape.com/?';
    
-    $scope.amount = null;
-    $scope.currency_code_input = null; //currency code to convert
-    $scope.currency_code_output = null; //currency code to output
+    $scope.amount = null;    
+    $scope.currency_code_input = null;				 
+    $scope.currency_code_output = null;
     $scope.currencies = [];
     $scope.resultMessage = [];
     $scope.showResult = false;
@@ -109,12 +109,12 @@ function page_controller($scope, $http){
     
     
     //called on page load
-    $scope.init = function() {
-        retrieveCurrencies();	
+    $scope.init = function() {	
+        retrieveCurrencies();	 
     };
     
     $scope.$watchCollection('currency_code_input', function() {
-        convert();
+	convert();
     });
     
     $scope.$watchCollection('currency_code_output', function() {
@@ -132,11 +132,14 @@ function page_controller($scope, $http){
     };
     
     $scope.convertNow = function(){
-        convert();
+	convert();
     };
     
     //submits and create a request
     var convert = function(){
+	
+	if($scope.currencies.length === 0)
+	    return false;
 	
 	if($scope.currency_code_input === null)
         {
@@ -163,12 +166,12 @@ function page_controller($scope, $http){
         var input_code = $scope.currency_code_input.currency_code;
         var output_code = $scope.currency_code_output.currency_code;
 	
-	if (input_code === output_code)
+	/*if (input_code === output_code)
         {
            $scope.showResult = false;
 	   handleResponse('error','Currencies to convert shouldn\'t be the same.');
 	   return false;
-	}
+	}*/
 	
         //get the rates
         var input_rate = $scope.currency_code_input.rate;
@@ -214,7 +217,9 @@ function page_controller($scope, $http){
     var retrieveCurrencies = function(){        
          $http.get(currencies_url).success(function(data) {            
              if(!data.error){                
-                   $scope.currencies = data.data;		   
+                    $scope.currencies = data.data;
+		   //assign default values
+		   assignDefaultValues($scope.currencies,1);
             }
             else
                //show the result container
@@ -225,13 +230,26 @@ function page_controller($scope, $http){
     };
     
     
-   var handleResponse = function(type,message){
+     var handleResponse = function(type,message){
          var response = new Array();
          response.type = type;
          var response_body = {responseMsg:message};
          response.push(response_body);
          $scope.resultMessage = response;
          return false;
+     };
+     
+     /**
+      * Assign default values on load page
+      * 
+      * @param array data
+      * @param integer def_amount
+      * @returns none/void
+      */
+     var assignDefaultValues = function(data,def_amount){
+	  $scope.currency_code_input = data[148]; //fixed index for US
+	  $scope.currency_code_output = data[112];//fixed index for Philippines	  
+          $scope.amount = def_amount; //
      };
      
     
