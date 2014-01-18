@@ -113,7 +113,7 @@ function page_controller($scope, $http){
     //creates the url for the flag icon
     $scope.getFlag = function(symbol){
         
-        if(undefined !== symbol){               
+        if(undefined !== symbol && symbol && symbol.length > 0){               
             var url = 'http://s.xe.com/v2/themes/xe/images/flags/big/'+symbol.toLowerCase()+'.png';
             return url;
         }
