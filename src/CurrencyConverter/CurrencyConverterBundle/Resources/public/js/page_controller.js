@@ -169,8 +169,11 @@ function page_controller($scope, $http){
         }
        
         var output = processConversion($scope.amount,output_rate,input_rate);
-        $scope.resultAmount = output.toFixed(2);       
-        $scope.showResult = true; //display result
+        $scope.resultAmount = output.toFixed(2); 
+        
+        if(undefined != output && output && output > 0)
+           $scope.showResult = true; //display result
+       
         $scope.resultMessage = [];
        
     };
@@ -199,12 +202,27 @@ function page_controller($scope, $http){
      * 
      * @returns {undefined}
      */
-    var retrieveCurrencies = function(){        
+    var retrieveCurrencies = function(){ 
+       
+        $.blockUI({
+            css: { 
+            border: 'none', 
+            padding: '5px', 
+            backgroundColor: 'transparent', 
+            '-webkit-border-radius': '10px', 
+            '-moz-border-radius': '10px', 
+            opacity: .5, 
+            color: '#fff' 
+              },
+            message: "Loading data........"
+         }); 
+    
          $http.get(currencies_url).success(function(data) {            
              if(!data.error){                
                     $scope.currencies = data.data;
 		   //assign default values
 		   assignDefaultValues($scope.currencies,1.00);
+                   $.unblockUI();
             }
             else
                //show the result container
