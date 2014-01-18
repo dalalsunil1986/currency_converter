@@ -219,7 +219,7 @@ function page_controller($scope, $http){
              if(!data.error){                
                     $scope.currencies = data.data;
 		   //assign default values
-		   assignDefaultValues($scope.currencies,1);
+		   assignDefaultValues($scope.currencies,1.00);
             }
             else
                //show the result container

@@ -68,34 +68,5 @@ class ApiController extends ApiBaseController
         
         
     }
-    
-    //run twice a day by cron
-    public function conversionRatesAction(){
-        
-        $file = 'latest.json';
-        $appId = $this->container->getParameter('conversion_api_key');
-        
-        $ch = curl_init("http://openexchangerates.org/api/{$file}?app_id={$appId}");
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        $json = curl_exec($ch);
-        curl_close($ch);
-        
-        $obj = json_decode($json);
-        $rate_container = array();
-        
-        if(isset($obj->{'rates'})){
-            foreach($obj->{'rates'} as $key=>$rate){
-                $rate_container[$key]=$rate;
-            }
-        }
-        
-        //do database insertion here
-        die();
-        
-    }
-    
-    
-    
-    
    
 }

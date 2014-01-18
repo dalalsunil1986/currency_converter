@@ -8,6 +8,7 @@ use CurrencyConverter\CurrencyConverterBundle\Entity\Currency;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use CurrencyConverter\CurrencyConverterBundle\Entity\Country;
+use CurrencyConverter\CurrencyConverterBundle\Api\OpenExchange;
 
 /**
  * Running this on the CLI will fill up the database with necessary
@@ -33,8 +34,10 @@ class CurrencyFixtures implements FixtureInterface, ContainerAwareInterface
     
     public function load(ObjectManager $manager)
     {
-       
-        $rates = $this->callRates(); //grab all the rates
+        $appId = $this->container->getParameter('conversion_api_key');
+        $open_exchange = new OpenExchange($appId);
+        
+        $rates = $open_exchange->callRates($appId); //get all the rates
         
         $var = __DIR__.'/simple_html_dom.php';
         include_once($var);
@@ -183,33 +186,7 @@ class CurrencyFixtures implements FixtureInterface, ContainerAwareInterface
         
        
     }
-    
-    /**
-     * Call the rate for each currency
-     *
-     * @return array $rate_container
-     **/
-    public function callRates(){
-        
-        $file = 'latest.json';
-        $appId = $this->container->getParameter('conversion_api_key');
-        
-        header('Content-Type: application/json');
-        $json = file_get_contents("http://openexchangerates.org/api/{$file}?app_id={$appId}");
-      
-        $obj = json_decode($json);
-        $rate_container = array();
-        
-        if(isset($obj->{'rates'})){
-            foreach($obj->{'rates'} as $key=>$rate){
-                $rate_container[$key]=$rate;
-            }
-        }
-        
-        return $rate_container;
-    }
-    
-    
+   
     private function cleanString($string){
         return preg_replace('/ +/', ' ', preg_replace('/[^A-Za-z0-9 ]/', ' ', urldecode(html_entity_decode(strip_tags($string)))));
     }
