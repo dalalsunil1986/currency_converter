@@ -4,7 +4,7 @@
     </div>
    <div class="hero-block" ng-controller="page_controller" ng-init="init()">
        
-       <img ng-show="showResult == false || !amount" src="{{ asset('bundles/currencyconvertercurrencyconverter/img/go.png') }}" class="mb-7 hero-image">
+       <img ng-show="showResult == false || !amount" ng-src="{{ asset('bundles/currencyconvertercurrencyconverter/img/go.png') }}" class="mb-7 hero-image">
        
        <div class="result-container row-fluid" ng-show="showResult && amount">
 	   <div class = "span3 input-currency">
@@ -12,7 +12,7 @@
 		<span class="amount">{%raw%}{{amount}}{%endraw%}</span>
 		<span class="code">({%raw%}{{currency_code_input.currency_code}}{%endraw%})</span>
 	   </div>
-	   <div class="span1"><img src="{{ asset('bundles/currencyconvertercurrencyconverter/img/equals.png') }}" /></div>
+	   <div class="span1"><img ng-src="{{ asset('bundles/currencyconvertercurrencyconverter/img/equals.png') }}" /></div>
 	   <div class="span3 output-currency">
 		<span class="symbol">{%raw%}{{currency_code_output.currency_symbol}}{%endraw%}</span>
 		<span class="amount">{%raw%}{{resultAmount}}{%endraw%}</span>
@@ -27,14 +27,14 @@
 
              <div class="span4 left">
                  <div ng-show="currency_code_input.currency_code != undefined && currency_code_input.currency_code != ''" class="flag-holder">
-                     <img width="50" height="30" src="{%raw%}{{ getFlag(currency_code_input.currency_code) }}{%endraw%}" />
+                     <img width="50" height="30" ng-src="{%raw%}{{ getFlag(currency_code_input.currency_code) }}{%endraw%}" />
                  </div>
                  <select data-placeholder="Select input currency:" tabindex="2" ng-model="currency_code_input" ng-options="item.currency_info for item in currencies" name="currency_code_input" class="convert-from chosen-select" chosen="currencies" required>
                  </select>
              </div>
              <div class="span4 right">
                  <div ng-show="currency_code_output.currency_code != undefined && currency_code_output.currency_code != ''" class="flag-holder">
-                     <img  src="{%raw%}{{ getFlag(currency_code_output.currency_code) }}{%endraw%}" width="50" height="30" />
+                     <img  ng-src="{%raw%}{{ getFlag(currency_code_output.currency_code) }}{%endraw%}" width="50" height="30" />
                  </div>
                  <select data-placeholder="Select output currency:" tabindex="2" ng-options="item.currency_info for item in currencies" ng-model="currency_code_output" name="currency_code_to" class="convert-to chosen-select" chosen="currencies" required>
                  </select>
