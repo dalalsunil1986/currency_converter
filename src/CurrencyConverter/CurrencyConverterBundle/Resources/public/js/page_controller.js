@@ -28,7 +28,7 @@ ConverterApp.directive('chosen',function(){
    };
 });
 
-
+//directive for executing function on keypress
 ConverterApp.directive('ngEnter', function () {
     return function (scope, element, attrs) {
         element.bind("keydown keyup keypress", function (event) {          
@@ -40,17 +40,6 @@ ConverterApp.directive('ngEnter', function () {
 });
  
 
-
-ConverterApp.factory('pageFactory', function($http) {
-    return {        
-        baseRequest : function(url) {          
-            return $http.get(url).then(function(result) {
-               return result.data;
-            });
-        }
-        
-    };
-});
 
 /**
  * Used to restrict user for entering non-numeric inputs
@@ -93,35 +82,35 @@ ConverterApp.directive('amountConvert', function() {
 });
 
 
-
+//main page controller
 function page_controller($scope, $http){
     
     var currencies_url = '../web/api/load'; //api for retrieving currencies
-    var service_url = 'https://currencyconverter.p.mashape.com/?';
-   
+    
     $scope.amount = null;    
     $scope.currency_code_input = null;				 
     $scope.currency_code_output = null;
     $scope.currencies = [];
     $scope.resultMessage = [];
     $scope.showResult = false;
-    $scope.resultAmount = null;
+    $scope.resultAmount = null;    
     
-    
-    //called on page load
+    //initialize on page load
     $scope.init = function() {	
         retrieveCurrencies();	 
     };
     
+    //watch for a change in value on input currecncy select
     $scope.$watchCollection('currency_code_input', function() {
 	convert();
     });
     
+    //watch for a change in value on output currecncy select
     $scope.$watchCollection('currency_code_output', function() {
         convert();
     });
     
-    //gets the url for the flag icon
+    //creates the url for the flag icon
     $scope.getFlag = function(symbol){
         
         if(undefined !== symbol){               
@@ -131,11 +120,12 @@ function page_controller($scope, $http){
        
     };
     
+    
     $scope.convertNow = function(){
 	convert();
     };
     
-    //submits and create a request
+    //the main currency conversion process
     var convert = function(){
 	
 	if($scope.currencies.length === 0)
@@ -164,14 +154,8 @@ function page_controller($scope, $http){
         }
         
         var input_code = $scope.currency_code_input.currency_code;
-        var output_code = $scope.currency_code_output.currency_code;
+        var output_code = $scope.currency_code_output.currency_code;	
 	
-	/*if (input_code === output_code)
-        {
-           $scope.showResult = false;
-	   handleResponse('error','Currencies to convert shouldn\'t be the same.');
-	   return false;
-	}*/
 	
         //get the rates
         var input_rate = $scope.currency_code_input.rate;
@@ -203,6 +187,7 @@ function page_controller($scope, $http){
 	  return (input_value*(output_rate/input_rate));
      };
     
+    //resets values back to original form
     $scope.reset = function(){
 	$scope.showResult = false;	
 	$scope.resultMessage = [];
@@ -210,7 +195,7 @@ function page_controller($scope, $http){
     };     
     
     /**
-     * This do an ajax call and fill-up the dropdown list with currencies.
+     * Performs ajax call and fill-up the select input control with currency data.
      * 
      * @returns {undefined}
      */
@@ -229,7 +214,7 @@ function page_controller($scope, $http){
          });         
     };
     
-    
+    //error handler
      var handleResponse = function(type,message){
          var response = new Array();
          response.type = type;
@@ -240,13 +225,14 @@ function page_controller($scope, $http){
      };
      
      /**
-      * Assign default values on load page
+      * Assign default values
       * 
       * @param array data
       * @param integer def_amount
       * @returns none/void
       */
      var assignDefaultValues = function(data,def_amount){
+         //To avoid looping, we need to know the index for default values
 	  $scope.currency_code_input = data[148]; //fixed index for US
 	  $scope.currency_code_output = data[112];//fixed index for Philippines	  
           $scope.amount = def_amount; //
