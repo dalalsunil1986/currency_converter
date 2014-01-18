@@ -186,7 +186,7 @@ h1{
   position: absolute;
 
   /* Add a bit of padding to give some substance outside the "stitching" */
-  padding: 2px 0;
+  padding: 0 2px 4px 2px;
 
   /* Set the base colour */
   background-color: #a00;
