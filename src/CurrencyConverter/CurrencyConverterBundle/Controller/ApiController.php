@@ -8,6 +8,8 @@
 namespace CurrencyConverter\CurrencyConverterBundle\Controller;
 
 use CurrencyConverter\CurrencyConverterBundle\Controller\ApiBaseController;
+use CurrencyConverter\CurrencyConverterBundle\Api\Encryption;
+use CurrencyConverter\CurrencyConverterBundle\Api\OpenExchange;
 
 class ApiController extends ApiBaseController
 {
@@ -68,5 +70,33 @@ class ApiController extends ApiBaseController
         
         
     }
+    
+    /**
+     * This is another option for updating rates by calling this action from cronjob.
+     * Important thing here is the encrypted key to make sure that only authorized calls to this action will be allowed.
+     * 
+     * 
+     * @param string $encrypted_key the generated encrypted key using the console command 
+     * @throws \Exception
+     */
+    public function updateRatesAction($encrypted_key){
+       $ekey = $this->container->getParameter('encryption_key');
+       $keyword = $this->container->getParameter('secret_Key_word'); //the word to be encrypted 
+       $encryption = new Encryption($ekey);
+       $decoded_key = $encryption->decode($encrypted_key);       
+       if($decoded_key == $keyword){
+            $appId = $this->container->getParameter('conversion_api_key');
+            $open_exchange = new OpenExchange($appId);
+            $current_rates = $open_exchange->callRates($appId); //get the fresh/newest currency rates
+            $conn = $this->container->get('database_connection');        
+            $output = $open_exchange->updateCurrencyRates($conn,$current_rates); //update rates
+            die($output);    
+       }
+       else
+         throw new \Exception ('Not authorized.', 503);  
+    }
+    
+    
+    
    
 }

@@ -14,8 +14,8 @@ currency_converter_currency_converter_api_load:
     requirements:
         _method:  GET
         
-currency_converter_currency_converter_api_rates:
-    pattern:  /api/rates
-    defaults: { _controller: CurrencyConverterCurrencyConverterBundle:Api:conversionRates }
+currency_converter_currency_converter_update_rates:
+    pattern:  /api/update/rates/{encrypted_key}
+    defaults: { _controller: CurrencyConverterCurrencyConverterBundle:Api:updateRates }
     requirements:
         _method:  GET
