@@ -6,11 +6,6 @@ namespace CurrencyConverter\CurrencyConverterBundle\Api;
  * and open the template in the editor.
  */
 
-/**
- * Class for doing encrytion and decryption
- *
- * @author joecaps
- */
 class Encryption {
     
     protected $skey; // you can change it
