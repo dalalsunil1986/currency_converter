@@ -10,6 +10,14 @@ h1{
     font-size: 42px;
 }
 
+.row-fluid.title-holder.mobile{
+    display:none;
+}
+
+.built-by.mobile{
+    display:none;
+}
+
 .hero-block .span4{
    margin: 0 auto;
    float: none;
@@ -144,8 +152,6 @@ h1{
     color:#fff;
 }
 
-
-}
 .hero-block .result-container{
     color:#000;
     font-size: 34px;  
