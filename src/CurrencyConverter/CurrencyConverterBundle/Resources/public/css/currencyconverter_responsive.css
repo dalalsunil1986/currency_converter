@@ -1,0 +1,64 @@
+/*
+ * Author: Joel Capillo
+ * 
+ *
+ * Project Name: Currency Converter
+ * Version: 1.0
+ *
+ */
+@media (max-width: 960px){
+  .textbox-holder.row-fluid input
+   {
+     width: 300px;
+   }
+
+   .hero-block .span4.right{
+       margin-top:20px;
+   }
+   
+   .hero-block .result-container{
+    font-size: 36px;
+   }
+   
+   .text .span4{
+       width:300px;
+   }
+
+}
+
+@media (max-width: 720px){
+  .textbox-holder.row-fluid input
+   {
+     width: 300px;
+   }
+   
+   .hero-block .span4.right{
+       margin-top:20px;
+   }
+   
+   .hero-block .result-container{
+    font-size: 32px;
+   }
+   
+    .text .span4{
+       width:300px;
+   }
+
+}
+
+
+@media (max-width: 480px){
+ .textbox-holder.row-fluid input
+   {
+     width: 300px;
+   }
+  .hero-block .span4.right{
+       margin-top:20px;
+   }
+   .hero-block .result-container{
+    font-size: 24px;
+   }
+    .text .span4{
+       width:300px;
+   }
+}

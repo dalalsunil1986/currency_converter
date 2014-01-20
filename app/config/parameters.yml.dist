@@ -1,15 +1,16 @@
 parameters:
-    database_driver:   pdo_mysql
-    database_host:     127.0.0.1
+    database_driver: pdo_mysql
+    database_host: 127.0.0.1
     database_port:     
-    database_name:     symfony
-    database_user:     root
-    database_password: 
-
-    mailer_transport:  smtp
-    mailer_host:       127.0.0.1
+    database_name: symfony
+    database_user: root
+    database_password:
+    mailer_transport: smtp
+    mailer_host: 127.0.0.1
     mailer_user:       
-    mailer_password:  
-
-    locale:            en
-    secret:            ThisTokenIsNotSoSecretChangeIt
+    mailer_password:
+    conversion_api_key: change_this_to_your_Open_Exchange_Rate_app_id #the app id from Open Exchange Rate
+    secret_key_word: secret_key_word  #the word to decode
+    encryption_key: word_to_be_encrypted #key to decode your encrypted keyword
+    locale: en
+    secret: ThisTokenIsNotSoSecretChangeIt

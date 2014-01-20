@@ -33,9 +33,15 @@ class Currency
     protected $code;
 
      /**
-     * @ORM\Column(type="string", length=50)
+     * @ORM\Column(type="string", length=50, nullable=true)
      */
     protected $symbol;
+    
+    
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    protected $rate;
 
 
     /**
@@ -69,6 +75,17 @@ class Currency
     public function getCurrency()
     {
         return $this->currency;
+    }
+    
+    
+     /**
+     * Get rates
+     *
+     * @return float 
+     */
+    public function getRate()
+    {
+        return $this->rate;
     }
 
     /**
@@ -116,6 +133,21 @@ class Currency
     {
         return $this->symbol;
     }
+    
+     /**
+     * Set rate
+     *
+     * @param float $rate
+     *
+     * @return Currency
+     * 
+     */
+    public function setRate($rate)
+    {
+        $this->rate = $rate;
+        return $this;
+    }
+
 
     /**
      * Set country

@@ -1,0 +1,86 @@
+   <div class="row-fluid title-holder">
+            <h1>Currency Converter</h1>
+            <p>A simple, straightforward way to convert currency values.</p>            
+   </div>
+   <div class="hero-block" ng-controller="page_controller" ng-init="init()">
+       <div class="row-fluid title-holder mobile">
+             <h1>Currency Converter</h1>
+             <p>A simple, straightforward way to convert currency values.</p>            
+       </div>
+       <img ng-show="showResult == false || !amount" ng-src="{{ asset('bundles/currencyconvertercurrencyconverter/img/go.png') }}" class="mb-7 hero-image">
+       
+       <div class="result-container row-fluid" ng-show="showResult && amount">
+	   <div class = "span3 input-currency">
+		<span class="symbol">{%raw%}{{currency_code_input.currency_symbol}}{%endraw%}</span>
+		<span class="amount">{%raw%}{{amount}}{%endraw%}</span>
+		<span class="code">({%raw%}{{currency_code_input.currency_code}}{%endraw%})</span>
+	   </div>
+	   <div class="span1"><img ng-src="{{ asset('bundles/currencyconvertercurrencyconverter/img/equals.png') }}" /></div>
+	   <div class="span3 output-currency">
+		<span class="symbol">{%raw%}{{currency_code_output.currency_symbol}}{%endraw%}</span>
+		<span class="amount">{%raw%}{{resultAmount}}{%endraw%}</span>
+		<span class="code">({%raw%}{{currency_code_output.currency_code}}{%endraw%})</span>
+	   </div> 
+       </div>
+       
+       <form name = "currency_converter_form" ng-submit="" novalidate>
+
+        
+         <div class="row-fluid">
+
+             <div class="span4 left">
+                 <div ng-show="currency_code_input.currency_code != undefined && currency_code_input.currency_code != ''" class="flag-holder">
+                     <img width="50" height="30" ng-src="{%raw%}{{ getFlag(currency_code_input.currency_code) }}{%endraw%}" />
+                 </div>
+                 <select data-placeholder="Select input currency:" tabindex="2" ng-model="currency_code_input" ng-options="item.currency_info for item in currencies" name="currency_code_input" class="convert-from chosen-select" chosen="currencies" required>
+                 </select>
+             </div>
+             <div class="span4 right">
+                 <div ng-show="currency_code_output.currency_code != undefined && currency_code_output.currency_code != ''" class="flag-holder">
+                     <img  ng-src="{%raw%}{{ getFlag(currency_code_output.currency_code) }}{%endraw%}" width="50" height="30" />
+                 </div>
+                 <select data-placeholder="Select output currency:" tabindex="2" ng-options="item.currency_info for item in currencies" ng-model="currency_code_output" name="currency_code_to" class="convert-to chosen-select" chosen="currencies" required>
+                 </select>
+             </div>
+
+         </div>
+           
+         <div class="textbox-holder row-fluid">         
+                <input type="text" class="span4" id="amount" ng-model="amount" ng-enter="convertNow()" placeholder="Enter amount to convert....." name="amount_to_convert" amount-convert required>
+         </div>
+         
+       </form>
+       
+       
+       
+       <!--<button class="btn btn-danger reset" type="button" ng-show="showResult" ng-click="reset()">Back</button>-->
+       
+       
+        <!--error holder for ajax request-->
+        <div ng-show="resultMessage != null" class="error-holder row-fluid">                                                   
+               <div class="text span" ng-repeat="item in resultMessage">                                                          
+                    <div class="span4" ng-switch on = "resultMessage.type">  
+                        <div class="alert alert-success success" ng-switch-when = "success">  
+                             {%raw%}{{ item.responseMsg }}{%endraw%}
+                        </div> 
+                       <div class="alert alert-danger error" ng-switch-when = "error">  
+                             {%raw%}{{ item.responseMsg }}{%endraw%}
+                       </div> 
+                    </div>
+               </div>
+        </div>
+       <!--error holder for ajax request-->
+      <br />
+      <span class="built-by powered">Powered by: 
+	  <a href="http://symfony.com/legacy">Symfony</a>, 
+	  <a href="http://getbootstrap.com/">Bootstrap</a>, 
+	  <a href="http://angularjs.org/">AngularJs</a>,
+          <a href="http://xe.com/">XE</a>
+	  & <a href="https://openexchangerates.org/">Open Exchange Rates</a>
+      </span>
+      <br /> 
+      <span class="built-by">Created by: <a href="index.html#networks" class="scroll">Joel Capillo</a></span> 
+      <span class="built-by mobile">Created by: <a href="http://www.linkedin.com/pub/joel-capillo/26/8b4/ba3">Joel Capillo</a></span> 
+    </div>
+    <a href="index.html#networks" class="scroll arrow"><span class="down-arrow"></span></a>
+

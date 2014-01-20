@@ -11,7 +11,7 @@
 namespace CurrencyConverter\CurrencyConverterBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Bundle\FrameworkBundle\Controller\ControllerResolver;
+use CurrencyConverter\CurrencyConverterBundle\Controller\BaseControllerResolver;
 use Symfony\Component\HttpFoundation\Response;
 use CurrencyConverter\CurrencyConverterBundle\Kernel\ApiKernel;
 
@@ -22,12 +22,14 @@ class ApiBaseController extends Controller
     protected $country_repository; //exposes the CountryRepository object
     protected $currency_repository; //exposes the CurrencyRepository object
     
+
     public function __construct(){  
         
         $kernel = new ApiKernel('prod', true);
         $kernel->boot();
         
         $this->setContainer($kernel->getContainer());
+
         
         $this->entity_manager = $this->getDoctrine()
                                 ->getManager();
@@ -35,6 +37,8 @@ class ApiBaseController extends Controller
                                     ->getRepository('CurrencyConverterCurrencyConverterBundle:Country');
         $this->currency_repository = $this->entity_manager
                                      ->getRepository('CurrencyConverterCurrencyConverterBundle:Currency');
+                                     
+        
     }
     
     
