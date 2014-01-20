@@ -45,8 +45,9 @@
 
          </div>
            
-         <div class="textbox-holder row-fluid">         
-                <input type="text" class="span4" id="amount" ng-model="amount" ng-enter="convertNow()" placeholder="Enter amount to convert....." name="amount_to_convert" amount-convert required>
+         <div class="textbox-holder row-fluid">
+	        <span for="amount" class="built-by mobile">Enter amount to convert :</span>
+                <input type="text" name="amount" class="span4" id="amount" ng-model="amount" ng-enter="convertNow()" placeholder="Enter amount to convert....." name="amount_to_convert" amount-convert required>
          </div>
          
        </form>
@@ -80,7 +81,10 @@
       </span>
       <br /> 
       <span class="built-by">Created by: <a href="index.html#networks" class="scroll">Joel Capillo</a></span> 
-      <span class="built-by mobile">Created by: <a href="http://www.linkedin.com/pub/joel-capillo/26/8b4/ba3">Joel Capillo</a></span> 
+      <span class="built-by mobile">
+	 Created by: <a href="http://www.linkedin.com/pub/joel-capillo/26/8b4/ba3">Joel Capillo</a>
+         <br />( Mobile Version )
+      </span> 
     </div>
     <a href="index.html#networks" class="scroll arrow"><span class="down-arrow"></span></a>
 

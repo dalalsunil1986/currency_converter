@@ -6,59 +6,92 @@
  * Version: 1.0
  *
  */
-@media (max-width: 960px){
+
+@media (max-width: 1060px){
+  .row-fluid.title-holder p{
+    display:none;
+  }
+}
+
+@media (max-width: 860px){
+  
   .textbox-holder.row-fluid input
    {
-     width: 300px;
+     max-width: 180px;
+     max-height:30px;     
    }
-
-   .hero-block .span4.right{
-       margin-top:20px;
+  
+    .hero-block .span4.right{
+       margin-top:10px;      
+   }
+   
+   .hero-block .span4.left{
+       margin-top:15px;
    }
    
    .hero-block .result-container{
-    font-size: 36px;
+    font-size: 22px;
+    margin-top: 0;
    }
+   
+    .hero-block .result-container .span1{
+      margin-right:15px;
+    }
    
    .text .span4{
-       width:300px;
+       width:auto;
    }
-
-}
-
-@media (max-width: 720px){
-  .textbox-holder.row-fluid input
+    
+   .hero-block .chosen-container,
+   .hero-block .row-fluid select {
+        width: 180px!important; 
+               
+   }   
+   
+   .row-fluid.title-holder p,
+   .hero-block span.built-by,
+   .nav,
+   #networks,
+   a.scroll.arrow,
+   .row-fluid.title-holder
    {
-     width: 300px;
+       display: none;       
    }
    
-   .hero-block .span4.right{
-       margin-top:20px;
+   .row-fluid.title-holder h1{
+       font-size: 26px;
+       margin-top:0;
    }
    
-   .hero-block .result-container{
-    font-size: 32px;
+   .hero-block span.built-by.mobile{
+       display:block;  
+       padding-bottom:0;
+       margin-top:-20px;
    }
    
-    .text .span4{
-       width:300px;
+  .hero-block .chosen-container .chosen-results li.active-result {
+       font-weight: normal;
    }
-
-}
-
-
-@media (max-width: 480px){
- .textbox-holder.row-fluid input
-   {
-     width: 300px;
+   
+   .github-fork-ribbon-wrapper{
+       display:none;
    }
-  .hero-block .span4.right{
-       margin-top:20px;
+ 
+   #hero{
+     margin-top:0;
+     background: transparent;    
+     height:600px!important;     
    }
-   .hero-block .result-container{
-    font-size: 24px;
+   
+   body{
+       background: #3498db;
+      
    }
-    .text .span4{
-       width:300px;
-   }
+ 
+   .row-fluid.title-holder.mobile{
+       display:block;
+       margin: -80px 0 20px 0;
+       padding: 0;
+   }  
+   
 }
