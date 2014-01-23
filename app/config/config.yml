@@ -67,4 +67,10 @@ swiftmailer:
     username:  "%mailer_user%"
     password:  "%mailer_password%"
     spool:     { type: memory }
-    
+
+services:  
+    kernel.listener.currencyconverter_currencyconverter_exception_listener:
+        class: CurrencyConverter\CurrencyConverterBundle\Listener\ExceptionListener
+        arguments: [@templating, @kernel]
+        tags:
+            - { name: kernel.event_listener, event: kernel.exception, method: onKernelException }

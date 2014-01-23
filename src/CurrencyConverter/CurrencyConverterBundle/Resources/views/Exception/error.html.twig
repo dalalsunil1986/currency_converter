@@ -1,0 +1,24 @@
+{% extends 'CurrencyConverterCurrencyConverterBundle::layout.html.twig' %}
+
+
+
+{% block section_hero %}
+   <div class="row-fluid title-holder">
+           <h1>Currency Converter</h1>
+            <p>A simple, straightforward way to convert currency values.</p>    
+   </div>
+   
+   <div class="row-fluid error-holder">
+            <h2>Error: {{code}}</h2>
+            <p>{{message}}</p>
+   </div>
+{% endblock %}
+
+{% block section_work %}
+  {% include 'CurrencyConverterCurrencyConverterBundle:Home:work.html.twig' %}
+{% endblock %}
+
+{% block section_networks %}
+  {% include 'CurrencyConverterCurrencyConverterBundle:Home:networks.html.twig' %}
+{% endblock %}
+
