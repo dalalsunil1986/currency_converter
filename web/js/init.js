@@ -6,4 +6,4 @@
  * Version: 1.0
  *
  */
-var ConverterApp = angular.module('CurrencyConverterApp', []);
+var ConverterApp = angular.module('CurrencyConverterApp', ['ngAnimate']);

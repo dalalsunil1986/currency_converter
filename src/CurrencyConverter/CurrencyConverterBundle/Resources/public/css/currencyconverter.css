@@ -10,9 +10,11 @@ h1{
     font-size: 42px;
 }
 
+
 .row-fluid.title-holder.mobile{
     display:none;
 }
+
 
 .built-by.mobile{
     display:none;
@@ -152,6 +154,8 @@ h1{
     color:#fff;
 }
 
+
+}
 .hero-block .result-container{
     color:#000;
     font-size: 34px;  
@@ -328,7 +332,7 @@ h1{
    margin-bottom: 15px; 
 }
 
-.error-holder{
+.exception-holder{
     color:#000;
     margin-top:100px;
 }

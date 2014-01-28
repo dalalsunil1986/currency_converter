@@ -93,11 +93,21 @@ function page_controller($scope, $http){
     $scope.currencies = [];
     $scope.resultMessage = [];
     $scope.showResult = false;
-    $scope.resultAmount = null;    
+    $scope.resultAmount = null;
+  
     
     //initialize on page load
     $scope.init = function() {	
         retrieveCurrencies();	 
+    };
+    
+    
+    $scope.filterAmount = function(amount){
+      if(!amount){
+         return '';
+      }
+      else
+       return amount;
     };
     
     //watch for a change in value on input currecncy select
@@ -122,7 +132,7 @@ function page_controller($scope, $http){
     
     
     $scope.convertNow = function(){
-	convert();
+      convert();
     };
     
     //the main currency conversion process
@@ -172,7 +182,9 @@ function page_controller($scope, $http){
         $scope.resultAmount = output.toFixed(2); 
         
         if(undefined != output && output && output > 0)
+        {
            $scope.showResult = true; //display result
+        }
        
         $scope.resultMessage = [];
        

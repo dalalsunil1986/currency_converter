@@ -9,10 +9,10 @@
        </div>
        <img ng-show="showResult == false || !amount" ng-src="{{ asset('bundles/currencyconvertercurrencyconverter/img/go.png') }}" class="mb-7 hero-image">
        
-       <div class="result-container row-fluid" ng-show="showResult && amount">
+       <div class="result-container row-fluid bouncy-slide-top" ng-show="showResult && amount">
 	   <div class = "span3 input-currency">
 		<span class="symbol">{%raw%}{{currency_code_input.currency_symbol}}{%endraw%}</span>
-		<span class="amount">{%raw%}{{amount}}{%endraw%}</span>
+		<span class="amount">{%raw%}{{filterAmount(amount)}}{%endraw%}</span>
 		<span class="code">({%raw%}{{currency_code_input.currency_code}}{%endraw%})</span>
 	   </div>
 	   <div class="span1"><img ng-src="{{ asset('bundles/currencyconvertercurrencyconverter/img/equals.png') }}" /></div>
@@ -51,12 +51,7 @@
          </div>
          
        </form>
-       
-       
-       
-       <!--<button class="btn btn-danger reset" type="button" ng-show="showResult" ng-click="reset()">Back</button>-->
-       
-       
+      
         <!--error holder for ajax request-->
         <div ng-show="resultMessage != null" class="error-holder row-fluid">                                                   
                <div class="text span" ng-repeat="item in resultMessage">                                                          

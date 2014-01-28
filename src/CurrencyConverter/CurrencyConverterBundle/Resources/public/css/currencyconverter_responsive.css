@@ -18,7 +18,8 @@
   .textbox-holder.row-fluid input
    {
      max-width: 180px;
-     max-height:30px;     
+     max-height:30px;  
+     padding-top:0;   
    }
   
     .hero-block .span4.right{
@@ -94,9 +95,8 @@
        padding: 0;
    }
    
-   .error-holder{
-     margin-top:180px;
-   }
-
+  .exception-holder{  
+    margin-top:180px;
+  }
    
 }
